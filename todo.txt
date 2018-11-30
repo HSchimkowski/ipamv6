@@ -39,4 +39,4 @@
 - add function to search and register next free subnet of a given Network with a given network mask.
 
 
-Do you have an additional feature request? Send me an mail to <a href="mailto:helmut@schimkowski.net">helmut@schimkowski.net</a>!
+Do you have an additional feature request? Send me an mail to helmut@schimkowski.net!
