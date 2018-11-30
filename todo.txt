@@ -1,0 +1,42 @@
+(done) - fix: JS: clearing also clears Field "F0" when network in "70"-"7F" is selcted ... ???
+(done) - fix: clear do not work if a single-Cell-Network ($mask+8) is selected!
+(done) - JS: call clear function on ESC-key
+(done) - hint into matrix if there are "hidden" Networks, that are not visible into the current depth
+(done) - expand "hidden" subnets into Tree view if they are not reachable into the current depth
+(done) - add naviation links to headline
+(done) - on delete: ask how to handle with subnets?
+(done) - on delete: also delet subnets if wanted
+(done) - add custom networks (free Input of specific network address and mask)
+(done) - add Root-Network Form for beginning with a blank database
+(done) - open the new network view after adding a new Network
+(done) - fix: got some errors after inserting first root-network
+(done) - fix: when editing Networks, there is a Problem with the Available Netmasks (ex: edititing /120 networks -> only /106 - /113 is available)
+(done) - after edit an network go back to previus page
+(done) - check if network is valid and free in "add new network" form
+(done) - fix: Navigation does not always show and links to correct networks if there are more than one root network
+(done) - workaround: if you clear the network selection by hitting ESC, all cells will be cleared if cell "00" was in the selection. Workaround: reload the page
+(done) - implement e color-picker because IE and Safari do not support HTML5 input type "color". Used the color-picker from http://jscolor.com/ instead.
+
+[higher Priority]
+- implement the possibility to subnet a /33 network into some /38 Networks if they are in the same 8 bit boundry
+
+[lower priority]
+(done) - prove source-code against W3C Validator for HTML and CSS for better browser compatibility
+- only allow possible network-Sizes when editing networks (crete a hint with size of possible network-Sizes or something simmilar)
+- optimize Database structure
+- add Documentation/howto based on concept
+- add Documentation about system-requirements
+- protect against SQL-Injections
+- add Donate-Button :P
+- think about license
+- publish on http://www.schimkowski.net/IPAMv6/ (or maybe a subdomain like http://ipamv6.schimkowski.net)
+
+
+[optional]
+- add Interface and device functions
+- move Interface-Documentation to an seperate window?
+- add user-functionality to allow specified users to work only into their own-Subnets and have a read-only view to the complete Subnet-Tree
+- add function to search and register next free subnet of a given Network with a given network mask.
+
+
+Do you have an additional feature request? Send me an mail to <a href="mailto:helmut@schimkowski.net">helmut@schimkowski.net</a>!

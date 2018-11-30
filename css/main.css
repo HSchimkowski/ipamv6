@@ -1,0 +1,430 @@
+/*@CHARSET "utf-8"; */
+
+*
+{
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+	vertical-align: top;
+	font-family: 'Century Gothic', Verdana, Arial;
+}
+
+a {
+	color: #000000;
+}
+
+a:hover {
+	color: #0000CC;
+}
+
+ul {
+	margin-left: 20px;
+}
+
+li {
+	list-style-type: square;
+}
+
+hr {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+/*---- header ----*/
+header {
+	background-image: url('../img/page_header.png');
+	background-color: #0b2e66;
+	background-repeat: no-repeat;
+	background-position: center top;
+	height: 40px;
+	border-bottom: solid 1px #ffffff;
+	padding: 0px;
+	color: #ffffff;
+	font-size: 30px;
+	text-align: center;
+}
+
+#header_page, #main_page {
+	min-width: 1200px;
+}
+
+header .links {
+	margin: 0 10px 0 0;
+	text-align: right;
+	display: block;
+}
+
+header .links a{
+	font-size:10px;
+	color: #dcdcdc;
+}
+
+/*---- main ----*/
+#main {
+	font-size: 12px;
+	background-repeat: repeat-x;
+	background-position: center top;
+	min-height: 200px;
+}
+
+
+/*---- left ----*/
+#left {
+	padding: 10px 20px 0 10px;
+	float: left;
+	width: 150px;
+}
+
+/*---- right ---- */
+#right {
+	padding: 0 20px 20px 10px;
+	border-left: solid 1px #dcdcdc;	
+	float: left;
+}
+
+/*---- sudoku ----*/
+#navBar
+{
+	font-size:20px;
+	padding-bottom:5px;
+    clear: both;
+}
+
+#navBar a
+{
+	color: #000000;
+	margin-left: 1px;
+	margin-right: 1px;
+}
+
+#navBar a:hover
+{
+	background: #00ffee;
+}
+
+#navBar .current
+{
+	color: red;
+}
+
+footer {
+	clear: both;
+	text-align: center;
+	font-size: 12px;
+	border-top: solid 1px #dcdcdc
+}
+
+footer a {
+	color: #888888;
+}
+footer a:hover {
+	color: #000000;
+}
+
+#subnetted
+{
+	float: right;
+	margin: 10px;
+}
+#sudoku
+{
+	width: 600px;
+	border-right: solid 1px #dcdcdc;
+	margin-top: 10px;
+	float:left;
+}
+
+#sudoku table
+{
+	border: solid 6px #333333;
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+
+#sudoku td
+{
+	font-size: 12px;
+	width:  35px;
+	min-width: 35px;
+	height: 35px;
+	text-align: center;
+	border: dashed 1px #000000;
+}
+
+/*--- 2er blöcke ----*/
+#sudoku td.field_01, 
+#sudoku td.field_03, 
+#sudoku td.field_09, 
+#sudoku td.field_0B, 
+#sudoku td.field_11, 
+#sudoku td.field_13, 
+#sudoku td.field_19, 
+#sudoku td.field_1B,
+#sudoku td.field_21, 
+#sudoku td.field_23, 
+#sudoku td.field_29, 
+#sudoku td.field_2B, 
+#sudoku td.field_31, 
+#sudoku td.field_33, 
+#sudoku td.field_39, 
+#sudoku td.field_3B,
+#sudoku td.field_41, 
+#sudoku td.field_43, 
+#sudoku td.field_49, 
+#sudoku td.field_4B, 
+#sudoku td.field_51, 
+#sudoku td.field_53, 
+#sudoku td.field_59, 
+#sudoku td.field_5B,
+#sudoku td.field_61, 
+#sudoku td.field_63, 
+#sudoku td.field_69, 
+#sudoku td.field_6B, 
+#sudoku td.field_71, 
+#sudoku td.field_73, 
+#sudoku td.field_79, 
+#sudoku td.field_7B,
+#sudoku td.field_81, 
+#sudoku td.field_83, 
+#sudoku td.field_89, 
+#sudoku td.field_8B, 
+#sudoku td.field_91, 
+#sudoku td.field_93, 
+#sudoku td.field_99, 
+#sudoku td.field_9B,
+#sudoku td.field_A1, 
+#sudoku td.field_A3, 
+#sudoku td.field_A9, 
+#sudoku td.field_AB, 
+#sudoku td.field_B1, 
+#sudoku td.field_B3, 
+#sudoku td.field_B9, 
+#sudoku td.field_BB,
+#sudoku td.field_C1, 
+#sudoku td.field_C3, 
+#sudoku td.field_C9, 
+#sudoku td.field_CB, 
+#sudoku td.field_D1, 
+#sudoku td.field_D3, 
+#sudoku td.field_D9, 
+#sudoku td.field_DB,
+#sudoku td.field_E1, 
+#sudoku td.field_E3, 
+#sudoku td.field_E9, 
+#sudoku td.field_EB, 
+#sudoku td.field_F1, 
+#sudoku td.field_F3, 
+#sudoku td.field_F9, 
+#sudoku td.field_FB
+{
+	border-right: solid 1px #000000;
+}
+
+/*--- 4er blöcke ----*/
+#sudoku td.field_05, 
+#sudoku td.field_07, 
+#sudoku td.field_0D, 
+#sudoku td.field_0F, 
+#sudoku td.field_45, 
+#sudoku td.field_47,
+#sudoku td.field_4D, 
+#sudoku td.field_4F,
+#sudoku td.field_25, 
+#sudoku td.field_27, 
+#sudoku td.field_2D, 
+#sudoku td.field_2F, 
+#sudoku td.field_65, 
+#sudoku td.field_67,
+#sudoku td.field_6D, 
+#sudoku td.field_6F,
+#sudoku td.field_85, 
+#sudoku td.field_87, 
+#sudoku td.field_8D, 
+#sudoku td.field_8F, 
+#sudoku td.field_A5, 
+#sudoku td.field_A7,
+#sudoku td.field_AD, 
+#sudoku td.field_AF,
+#sudoku td.field_C5, 
+#sudoku td.field_C7, 
+#sudoku td.field_CD, 
+#sudoku td.field_CF, 
+#sudoku td.field_E5, 
+#sudoku td.field_E7,
+#sudoku td.field_ED, 
+#sudoku td.field_EF
+{
+	border-right: solid 2px #000000;
+}
+
+/*--- 8er blöcke ----*/
+
+#sudoku td.field_15, 
+#sudoku td.field_17, 
+#sudoku td.field_1D, 
+#sudoku td.field_1F,
+#sudoku td.field_35, 
+#sudoku td.field_37, 
+#sudoku td.field_3D, 
+#sudoku td.field_3F,
+#sudoku td.field_95, 
+#sudoku td.field_97, 
+#sudoku td.field_9D, 
+#sudoku td.field_9F,
+#sudoku td.field_B5, 
+#sudoku td.field_B7, 
+#sudoku td.field_BD, 
+#sudoku td.field_BF
+{
+	border-right: solid 4px #000000;
+}
+
+/*--- 2er blöcke ----*/
+#sudoku td.field_02, 
+#sudoku td.field_03, 
+#sudoku td.field_06, 
+#sudoku td.field_07, 
+#sudoku td.field_12, 
+#sudoku td.field_13,
+#sudoku td.field_16, 
+#sudoku td.field_17,
+#sudoku td.field_42, 
+#sudoku td.field_43, 
+#sudoku td.field_46, 
+#sudoku td.field_47, 
+#sudoku td.field_52, 
+#sudoku td.field_53,
+#sudoku td.field_56, 
+#sudoku td.field_57,
+#sudoku td.field_22, 
+#sudoku td.field_23, 
+#sudoku td.field_26, 
+#sudoku td.field_27, 
+#sudoku td.field_32, 
+#sudoku td.field_33,
+#sudoku td.field_36, 
+#sudoku td.field_37,
+#sudoku td.field_62, 
+#sudoku td.field_63, 
+#sudoku td.field_66, 
+#sudoku td.field_67, 
+#sudoku td.field_72, 
+#sudoku td.field_73,
+#sudoku td.field_76, 
+#sudoku td.field_77,
+#sudoku td.field_82, 
+#sudoku td.field_83, 
+#sudoku td.field_86, 
+#sudoku td.field_87, 
+#sudoku td.field_92, 
+#sudoku td.field_93,
+#sudoku td.field_96, 
+#sudoku td.field_97,
+#sudoku td.field_C2, 
+#sudoku td.field_C3, 
+#sudoku td.field_C6, 
+#sudoku td.field_C7, 
+#sudoku td.field_D2, 
+#sudoku td.field_D3,
+#sudoku td.field_D6, 
+#sudoku td.field_D7,
+#sudoku td.field_A2, 
+#sudoku td.field_A3, 
+#sudoku td.field_A6, 
+#sudoku td.field_A7, 
+#sudoku td.field_B2, 
+#sudoku td.field_B3,
+#sudoku td.field_B6, 
+#sudoku td.field_B7,
+#sudoku td.field_E2, 
+#sudoku td.field_E3, 
+#sudoku td.field_E6, 
+#sudoku td.field_E7, 
+#sudoku td.field_F2, 
+#sudoku td.field_F3,
+#sudoku td.field_F6, 
+#sudoku td.field_F7
+{
+	border-bottom: solid 1px #000000;
+}
+
+/*--- 4er blöcke ----*/
+
+#sudoku td.field_0A, 
+#sudoku td.field_0B, 
+#sudoku td.field_0E, 
+#sudoku td.field_0F, 
+#sudoku td.field_1A, 
+#sudoku td.field_1B, 
+#sudoku td.field_1E, 
+#sudoku td.field_1F,
+#sudoku td.field_4A, 
+#sudoku td.field_4B, 
+#sudoku td.field_4E, 
+#sudoku td.field_4F, 
+#sudoku td.field_5A, 
+#sudoku td.field_5B, 
+#sudoku td.field_5E, 
+#sudoku td.field_5F,
+#sudoku td.field_8A, 
+#sudoku td.field_8B, 
+#sudoku td.field_8E, 
+#sudoku td.field_8F, 
+#sudoku td.field_9A, 
+#sudoku td.field_9B, 
+#sudoku td.field_9E, 
+#sudoku td.field_9F,
+#sudoku td.field_CA, 
+#sudoku td.field_CB, 
+#sudoku td.field_CE, 
+#sudoku td.field_CF, 
+#sudoku td.field_DA, 
+#sudoku td.field_DB, 
+#sudoku td.field_DE, 
+#sudoku td.field_DF
+{
+	border-bottom: solid 2px #000000;
+}
+
+/*--- 8er blöcke ----*/
+
+#sudoku td.field_2A, 
+#sudoku td.field_2B, 
+#sudoku td.field_2E, 
+#sudoku td.field_2F,
+#sudoku td.field_3A, 
+#sudoku td.field_3B, 
+#sudoku td.field_3E, 
+#sudoku td.field_3F,
+#sudoku td.field_6A, 
+#sudoku td.field_6B, 
+#sudoku td.field_6E, 
+#sudoku td.field_6F,
+#sudoku td.field_7A, 
+#sudoku td.field_7B, 
+#sudoku td.field_7E, 
+#sudoku td.field_7F
+{
+	border-bottom: solid 4px #000000;
+}
+
+
+body {counter-reset: ebene1;}
+
+h1:before {
+    content: counter(ebene1) " ";
+    counter-increment: ebene1;}
+h1 {counter-reset: ebene2;}
+
+h2:before {
+    content: counter(ebene1) "." counter(ebene2) " ";
+    counter-increment: ebene2;}
+h2 {counter-reset: ebene3;}
+
+h3:before {
+    content: counter(ebene1) "." counter(ebene2) "." counter(ebene3) " ";
+    counter-increment: ebene3;}
+
+td.hint {
+	padding-left: 10px;
+	color: orange;
+}
