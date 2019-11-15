@@ -11,4 +11,4 @@ Other software versions should also work well – but i have never tested it.
 
 On the client-side you only need a modern webbrowser with activated Javascript and HTML5 support.
 
-The Installation is also very simple. In a few steps you can just unzip the Script to your webservers directory, create a MySQL database and enter your database credentials to the file: "config.php" - like millions of other web-sever based scripts.
+The Installation is also very simple. In a few steps you can just unzip the Script to your webservers directory, create a MySQL database and enter your database credentials to the file: "config.php" - like millions of other webserver based scripts.
