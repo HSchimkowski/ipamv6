@@ -174,8 +174,14 @@ function navBar()
 		if(($i*8) == $gMask)
 			echo "<span class=\"current\">";
 		
+		if($i >= (64/8))
+			echo "<span class=\"host\">";
+
 		echo strtoupper($ip[$i]);
-				
+		
+		if($i >= (64/8))
+                        echo "</span>";
+
 		if(($i*8) == $gMask)
 			echo "</span>";
 		
