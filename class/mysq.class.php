@@ -22,6 +22,7 @@ error_reporting(E_ALL);
 class mysql 
 { 
     private $host     = '';  
+    private $port = '';
     private $user     = ''; 
     private $passwort     = '';  
     private $dbname     = ''; 
@@ -33,7 +34,8 @@ class mysql
      
     public function __construct() 
     { 
-        $this->host     = DB_HOST.":".DB_PORT; 
+        $this->host     = DB_HOST; 
+	$this->port	= DB_PORT;
         $this->user     = DB_USER; 
         $this->passwort = DB_PASS; 
         $this->dbname     = DB_NAME; 
@@ -45,7 +47,7 @@ class mysql
      
     private function connect_mysql() 
     { 
-        $this->conn_id = new mysqli($this->host,$this->user,$this->passwort, $this->dbname); 
+        $this->conn_id = new mysqli($this->host,$this->user,$this->passwort, $this->dbname, $this->port); 
          
         if($this->conn_id->connect_errno) 
         { 
