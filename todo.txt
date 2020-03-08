@@ -31,7 +31,6 @@
 - think about license
 - publish on http://www.schimkowski.net/IPAMv6/ (or maybe a subdomain like http://ipamv6.schimkowski.net)
 
-
 [optional]
 - implement usersettings
 - implemenet export to RIPE
