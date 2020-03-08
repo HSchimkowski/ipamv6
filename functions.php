@@ -79,34 +79,6 @@ function existNetwork($net, $mask)
 	}
 }
 
-
-function printInterfaces()
-{
-	global $sql;
-	
-	$net=new IPv6();
-	$net->initBinary($_GET['network'], $_GET['mask']);
-	echo "Interfaces into subnet ".$net->getMyCompressedAddress()."/".$net->myPrefix.":<br />";
-	$q = "SELECT 
-				i.address as address,
-				i.name as name,
-				i.description as description,
-				d.name as device
-			FROM 	`ipamv6_interfaces` AS i, 
-					`ipamv6_device` AS d 
-			WHERE 	i.`device` = d.`id` AND 
-					i.`address` LIKE '".substr($net->binNetwork(), 0, $net->myPrefix)."%'
-			ORDER BY i.`address` ASC";
-	$res = $sql->query($q);
-	
-	while($row = $sql->array_result($res))
-	{
-		$ip = new IPv6();
-		$ip->initBinary($row['address'], 128);
-		echo $ip->getMyCompressedAddress()." - ".$row['device'].".".$row['name']." (".$row['description'].")<br />";
-	}
-}
-
 function navBar()
 {
 	global $sql, $gNetwork, $gMask, $gIP;

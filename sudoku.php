@@ -130,7 +130,6 @@ They are not visible into your current view with a depth between /<?php echo $gM
 }?>
 </ul>
 		<hr />
-		<?php #printInterfaces(); ?>
 </div>
 
 

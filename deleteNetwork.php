@@ -36,14 +36,3 @@ else {?>
 <?php } ?>
 <input type="submit" value="yes"> <input type="button" value="cancel" onclick="history.go(-1);">
 </form>
-<?php 
-
-
-
-#$q = "DELETE FROM `ipamv6` WHERE `id`='".$id."';";
-#$res = $sql->query($q);
-
-#header("Location: ".$_SERVER["HTTP_REFERER"]);
-
-#exit();
-?>
