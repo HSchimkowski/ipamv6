@@ -33,6 +33,9 @@
 
 
 [optional]
+- implement usersettings
+- implemenet export to RIPE
+- implement import from RIPE
 - add Interface and device functions
 - move Interface-Documentation to an seperate window?
 - add user-functionality to allow specified users to work only into their own-Subnets and have a read-only view to the complete Subnet-Tree
