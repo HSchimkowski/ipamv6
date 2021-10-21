@@ -71,7 +71,7 @@ else
 			</div>
 		</div>
 		<footer>	
-			<a href="mailto:helge.holz@dataport.de">Conncept by Helge Holz</a>
+			<a href="mailto:helge.holz@dataport.de">Concept by Helge Holz</a>
 			<a href="http://www.schimkowski.net" target="_blank">developed by Helmut Schimkowski</a>
 		</footer>
 	</body>
