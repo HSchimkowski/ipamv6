@@ -4,7 +4,7 @@ $newNetwork 	= $_GET['newNetwork'];
 $newMask		= $_GET['newMask'];
 $newDescription	= $_GET['newDescription'];
 $newColour		= $_GET['newColour'];
-$newRoot		= $_GET['root'];
+$newRoot		= isset($_GET['root']) ? $_GET['root'] : 0;
 
 $insIp = new IPv6();
 

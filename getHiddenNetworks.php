@@ -7,7 +7,7 @@ $_SERVER['REQUEST_URI'];
 
 $lastNetwork_bin = $_GET['lastNetwork_bin'];
 $mask = $_GET['mask'];
-$root = $_GET['root'];
+$root = $_isset($_GET['root']) ? $_GET['root'] : 0;
 
 // start database connection
 $sql = new mysql("localhost","user","passwort","datenbank"); 

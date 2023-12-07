@@ -6,9 +6,13 @@ require_once 'class/ipv6.php';
 require_once 'functions.php';
 // load Session cookie
 
+error_reporting(E_ERROR | E_PARSE);
+
 // start database connection
 $sql = new mysql("localhost","user","passwort","datenbank"); 
 
+if (! isset($_GET['action']))
+	$_GET['action'] = "none";
 
 if ($_GET['action']=="addNewNetwork")
 	include_once 'addNewNetwork.php';
