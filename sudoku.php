@@ -154,7 +154,7 @@ $mask = $gMask;
 		# 00: 33,34,35,36,37,38,39,40
 		$q="SELECT * FROM  `ipamv6` WHERE (
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000000", $mask)."%' AND `mask`>='".($mask+1)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("00", $row);
@@ -165,7 +165,7 @@ $mask = $gMask;
 		$q="SELECT * FROM  `ipamv6` WHERE (
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000001", $mask)."%' AND `mask`>='".($mask+8)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("01", $row);
@@ -176,7 +176,7 @@ $mask = $gMask;
 		$q="SELECT * FROM  `ipamv6` WHERE ( 
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000100", $mask)."%' AND `mask`>='".($mask+6)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("04", $row);
@@ -189,7 +189,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000100", $mask)."%' AND `mask`>='".($mask+6)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000101", $mask)."%' AND `mask`>='".($mask+8)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("05", $row);
@@ -200,7 +200,7 @@ $mask = $gMask;
 		$q="SELECT * FROM  `ipamv6` WHERE ( 
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00010000", $mask)."%' AND `mask`>='".($mask+4)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("10", $row);
@@ -213,7 +213,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00010000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00010001", $mask)."%' AND `mask`>='".($mask+8)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("11", $row);
@@ -226,7 +226,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00010000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00010100", $mask)."%' AND `mask`>='".($mask+6)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("14", $row);
@@ -241,7 +241,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00010000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00010100", $mask)."%' AND `mask`>='".($mask+6)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00010101", $mask)."%' AND `mask`>='".($mask+8)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("15", $row);
@@ -251,7 +251,7 @@ $mask = $gMask;
 		$q="SELECT * FROM  `ipamv6` WHERE ( 
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000000", $mask)."%' AND `mask`='".($mask+1)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01000000", $mask)."%' AND `mask`>='".($mask+2)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("40", $row);
@@ -263,7 +263,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000000", $mask)."%' AND `mask`='".($mask+1)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01000000", $mask)."%' AND `mask`>='".($mask+2)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01000001", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("41", $row);
@@ -276,7 +276,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000000", $mask)."%' AND `mask`='".($mask+1)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01000000", $mask)."%' AND `mask`>='".($mask+2)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01000100", $mask)."%' AND `mask`>='".($mask+6)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("44", $row);
@@ -290,7 +290,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01000000", $mask)."%' AND `mask`>='".($mask+2)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01000100", $mask)."%' AND `mask`>='".($mask+6)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01000101", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("45", $row);
@@ -303,7 +303,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000000", $mask)."%' AND `mask`='".($mask+1)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01000000", $mask)."%' AND `mask`>='".($mask+2)."' AND `mask`<='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01010000", $mask)."%' AND `mask`>='".($mask+4)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("50", $row);
@@ -317,7 +317,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01000000", $mask)."%' AND `mask`>='".($mask+2)."' AND `mask`<='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01010000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01010001", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("51", $row);
@@ -331,7 +331,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01000000", $mask)."%' AND `mask`>='".($mask+2)."' AND `mask`<='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01010000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01010100", $mask)."%' AND `mask`>='".($mask+6)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("54", $row);
@@ -347,7 +347,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01010000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01010100", $mask)."%' AND `mask`>='".($mask+6)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01010101", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("55", $row);
@@ -362,7 +362,7 @@ $mask = $gMask;
 		$q="SELECT * FROM  `ipamv6` WHERE ( 
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000010", $mask)."%' AND `mask`>='".($mask+7)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("02", $row);
@@ -375,7 +375,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000010", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000011", $mask)."%' AND `mask`>='".($mask+8)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("03", $row);
@@ -388,7 +388,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000110", $mask)."%' AND `mask`>='".($mask+7)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("06", $row);
@@ -403,7 +403,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000110", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000111", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("07", $row);
@@ -416,7 +416,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00010000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00010010", $mask)."%' AND `mask`>='".($mask+7)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("12", $row);
@@ -431,7 +431,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00010000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00010010", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00010011", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("13", $row);
@@ -446,7 +446,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00010000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00010100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00010110", $mask)."%' AND `mask`>='".($mask+7)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("16", $row);
@@ -463,7 +463,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00010100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00010110", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00010111", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("17", $row);
@@ -476,7 +476,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000000", $mask)."%' AND `mask`='".($mask+1)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01000000", $mask)."%' AND `mask`>='".($mask+2)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01000010", $mask)."%' AND `mask`>='".($mask+7)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("42", $row);
@@ -491,7 +491,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01000000", $mask)."%' AND `mask`>='".($mask+2)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01000010", $mask)."%' AND `mask`='".($mask+7)."' OR 
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01000011", $mask)."%' AND `mask`>='".($mask+7)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("43", $row);
@@ -506,7 +506,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01000000", $mask)."%' AND `mask`>='".($mask+2)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01000100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01000110", $mask)."%' AND `mask`>='".($mask+7)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("46", $row);
@@ -522,7 +522,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01000100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01000110", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01000111", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("47", $row);
@@ -537,7 +537,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01000000", $mask)."%' AND `mask`>='".($mask+2)."' AND `mask`<='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01010000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01010010", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("52", $row);
@@ -553,7 +553,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01010000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01010010", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01010011", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("53", $row);
@@ -569,7 +569,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01010000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01010100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01010110", $mask)."%' AND `mask`>='".($mask+7)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("56", $row);
@@ -587,7 +587,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01010100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01010110", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01010111", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("57", $row);
@@ -602,7 +602,7 @@ $mask = $gMask;
 		$q="SELECT * FROM  `ipamv6` WHERE ( 
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00001000", $mask)."%' AND `mask`>='".($mask+5)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("08", $row);
@@ -614,7 +614,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00001000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00001001", $mask)."%' AND `mask`>='".($mask+8)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("09", $row);
@@ -627,7 +627,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00001000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00001100", $mask)."%' AND `mask`>='".($mask+6)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("0C", $row);
@@ -642,7 +642,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00001000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00001100", $mask)."%' AND `mask`>='".($mask+6)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00001101", $mask)."%' AND `mask`>='".($mask+8)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("0D", $row);
@@ -655,7 +655,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00010000", $mask)."%' AND `mask`='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00011000", $mask)."%' AND `mask`>='".($mask+5)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("18", $row);
@@ -670,7 +670,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00010000", $mask)."%' AND `mask`='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00011000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00011001", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("19", $row);
@@ -685,7 +685,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00010000", $mask)."%' AND `mask`='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00011000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00011100", $mask)."%' AND `mask`>='".($mask+6)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("1C", $row);
@@ -702,7 +702,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00011000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00011100", $mask)."%' AND `mask`>='".($mask+6)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00011101", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("1D", $row);
@@ -714,7 +714,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000000", $mask)."%' AND `mask`='".($mask+1)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01000000", $mask)."%' AND `mask`>='".($mask+2)."' AND `mask`<='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01001000", $mask)."%' AND `mask`>='".($mask+5)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("48", $row);
@@ -728,7 +728,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01000000", $mask)."%' AND `mask`>='".($mask+2)."' AND `mask`<='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01001000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01001001", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("49", $row);
@@ -742,7 +742,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01000000", $mask)."%' AND `mask`>='".($mask+2)."' AND `mask`<='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01001000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01001100", $mask)."%' AND `mask`>='".($mask+6)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("4C", $row);
@@ -759,7 +759,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01001000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01001100", $mask)."%' AND `mask`>='".($mask+6)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01001101", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("4D", $row);
@@ -773,7 +773,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01000000", $mask)."%' AND `mask`>='".($mask+2)."' AND `mask`<='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01010000", $mask)."%' AND `mask`='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01011000", $mask)."%' AND `mask`>='".($mask+5)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("58", $row);
@@ -789,7 +789,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01010000", $mask)."%' AND `mask`='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01011000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01011001", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("59", $row);
@@ -806,7 +806,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01010000", $mask)."%' AND `mask`='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01011000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01011100", $mask)."%' AND `mask`>='".($mask+6)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("5C", $row);
@@ -824,7 +824,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01011000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01011100", $mask)."%' AND `mask`>='".($mask+6)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01011101", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("5D", $row);
@@ -842,7 +842,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00001000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00001010", $mask)."%' AND `mask`>='".($mask+7)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("0A", $row);
@@ -858,7 +858,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00001000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00001010", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00001011", $mask)."%' AND `mask`>='".($mask+8)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("0B", $row);
@@ -873,7 +873,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00001000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00001100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00001110", $mask)."%' AND `mask`>='".($mask+7)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("0E", $row);
@@ -890,7 +890,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00001100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00001110", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00001111", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("0F", $row);
@@ -905,7 +905,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00010000", $mask)."%' AND `mask`='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00011000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00011010", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("1A", $row);
@@ -922,7 +922,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00011000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00011010", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00011011", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("1B", $row);
@@ -939,7 +939,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00011000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00011100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00011110", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("1E", $row);
@@ -958,7 +958,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00011100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00011110", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00011111", $mask)."%' AND `mask`>='".($mask+8)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("1F", $row);
@@ -972,7 +972,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01000000", $mask)."%' AND `mask`>='".($mask+2)."' AND `mask`<='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01001000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01001010", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("4A", $row);
@@ -988,7 +988,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01001000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01001010", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01001011", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("4B", $row);
@@ -1005,7 +1005,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01001000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01001100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01001110", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("4E", $row);
@@ -1024,7 +1024,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01001100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01001110", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01001111", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("4F", $row);
@@ -1040,7 +1040,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01010000", $mask)."%' AND `mask`='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01011000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01011010", $mask)."%' AND `mask`>='".($mask+7)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("5A", $row);
@@ -1058,7 +1058,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01011000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+6)."'OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01011010", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01011011", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("5B", $row);
@@ -1076,7 +1076,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01011000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01011100", $mask)."%' AND `mask`='".($mask+6)."' OR 
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01011110", $mask)."%' AND `mask`>='".($mask+7)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("5E", $row);
@@ -1096,7 +1096,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01011100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01011110", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01011111", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("5F", $row);
@@ -1111,7 +1111,7 @@ $mask = $gMask;
 		$q="SELECT * FROM  `ipamv6` WHERE ( 
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+2)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00100000", $mask)."%' AND `mask`>='".($mask+3)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("20", $row);
@@ -1124,7 +1124,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+2)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00100001", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("21", $row);
@@ -1137,7 +1137,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+2)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00100100", $mask)."%' AND `mask`>='".($mask+6)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("24", $row);
@@ -1152,7 +1152,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00100100", $mask)."%' AND `mask`>='".($mask+6)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00100101", $mask)."%' AND `mask`>='".($mask+8)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("25", $row);
@@ -1166,7 +1166,7 @@ $mask = $gMask;
 			`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+2)."'  OR 
 			`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00100000", $mask)."%' AND `mask`='".($mask+3)."'  OR 
 			`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00110000", $mask)."%' AND `mask`>='".($mask+4)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("30", $row);
@@ -1180,7 +1180,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00100000", $mask)."%' AND `mask`='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00110000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00110001", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("31", $row);
@@ -1194,7 +1194,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00100000", $mask)."%' AND `mask`='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00110000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00110100", $mask)."%' AND `mask`>='".($mask+6)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("34", $row);
@@ -1210,7 +1210,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00110000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00110100", $mask)."%' AND `mask`>='".($mask+6)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00110101", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("35", $row);
@@ -1223,7 +1223,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000000", $mask)."%' AND `mask`='".($mask+1)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01000000", $mask)."%' AND `mask`='".($mask+2)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01100000", $mask)."%' AND `mask`>='".($mask+3)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("60", $row);
@@ -1237,7 +1237,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01000000", $mask)."%' AND `mask`='".($mask+2)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01100001", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("61", $row);
@@ -1251,7 +1251,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01000000", $mask)."%' AND `mask`='".($mask+2)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01100100", $mask)."%' AND `mask`>='".($mask+6)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("64", $row);
@@ -1267,7 +1267,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01100100", $mask)."%' AND `mask`>='".($mask+6)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01100101", $mask)."%' AND `mask`>='".($mask+8)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("65", $row);
@@ -1286,7 +1286,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01000000", $mask)."%' AND `mask`='".($mask+2)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01100000", $mask)."%' AND `mask`='".($mask+3)."'  OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01110000", $mask)."%' AND `mask`>='".($mask+4)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("70", $row);
@@ -1302,7 +1302,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01100000", $mask)."%' AND `mask`='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01110000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01110001", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("71", $row);
@@ -1318,7 +1318,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01100000", $mask)."%' AND `mask`='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01110000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01110100", $mask)."%' AND `mask`>='".($mask+6)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("74", $row);
@@ -1336,7 +1336,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01110000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01110100", $mask)."%' AND `mask`>='".($mask+6)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01110101", $mask)."%' AND `mask`>='".($mask+8)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("75", $row);
@@ -1354,7 +1354,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+2)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00100010", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("22", $row);
@@ -1369,7 +1369,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00100010", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00100011", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("23", $row);
@@ -1383,7 +1383,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00100100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00100110", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("26", $row);
@@ -1400,7 +1400,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00100100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00100110", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00100111", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("27", $row);
@@ -1415,7 +1415,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00100000", $mask)."%' AND `mask`='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00110000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00110010", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("32", $row);
@@ -1431,7 +1431,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00110000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00110010", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00110011", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("33", $row);
@@ -1447,7 +1447,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00110000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00110100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00110110", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("36", $row);
@@ -1465,7 +1465,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00110100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00110110", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00110111", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("37", $row);
@@ -1479,7 +1479,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01000000", $mask)."%' AND `mask`='".($mask+2)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01100010", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("62", $row);
@@ -1495,7 +1495,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01100010", $mask)."%' AND `mask`='".($mask+7)."' OR 
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01100011", $mask)."%' AND `mask`>='".($mask+8)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("63", $row);
@@ -1511,7 +1511,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01100100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01100110", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("66", $row);
@@ -1529,7 +1529,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01100100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01100110", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01100111", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("67", $row);
@@ -1545,7 +1545,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01100000", $mask)."%' AND `mask`='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01110000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01110010", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("72", $row);
@@ -1563,7 +1563,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01110000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01110010", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01110011", $mask)."%' AND `mask`>='".($mask+8)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("73", $row);
@@ -1581,7 +1581,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01110000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01110100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01110110", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("76", $row);
@@ -1601,7 +1601,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01110100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01110110", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01110111", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("77", $row);
@@ -1618,7 +1618,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+2)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00101000", $mask)."%' AND `mask`>='".($mask+5)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("28", $row);
@@ -1632,7 +1632,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00101000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00101001", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("29", $row);
@@ -1646,7 +1646,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00101000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00101100", $mask)."%' AND `mask`>='".($mask+6)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("2C", $row);
@@ -1662,7 +1662,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00101000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00101100", $mask)."%' AND `mask`>='".($mask+6)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00101101", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("2D", $row);
@@ -1676,7 +1676,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00100000", $mask)."%' AND `mask`='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00110000", $mask)."%' AND `mask`='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00111000", $mask)."%' AND `mask`>='".($mask+5)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("38", $row);
@@ -1692,7 +1692,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00110000", $mask)."%' AND `mask`='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00111000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00111001", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("39", $row);
@@ -1708,7 +1708,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00110000", $mask)."%' AND `mask`='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00111000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00111100", $mask)."%' AND `mask`>='".($mask+6)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("3C", $row);
@@ -1726,7 +1726,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00111000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00111100", $mask)."%' AND `mask`>='".($mask+6)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00111101", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("3D", $row);
@@ -1741,7 +1741,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01000000", $mask)."%' AND `mask`='".($mask+2)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01101000", $mask)."%' AND `mask`>='".($mask+5)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("68", $row);
@@ -1757,7 +1757,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01101000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01101001", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("69", $row);
@@ -1773,7 +1773,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01101000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01101100", $mask)."%' AND `mask`>='".($mask+6)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("6C", $row);
@@ -1791,7 +1791,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01101000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01101100", $mask)."%' AND `mask`>='".($mask+6)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01101101", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("6D", $row);
@@ -1807,7 +1807,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01100000", $mask)."%' AND `mask`='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01110000", $mask)."%' AND `mask`='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01111000", $mask)."%' AND `mask`>='".($mask+5)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("78", $row);
@@ -1825,7 +1825,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01110000", $mask)."%' AND `mask`='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01111000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01111001", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("79", $row);
@@ -1843,7 +1843,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01110000", $mask)."%' AND `mask`='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01111000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01111100", $mask)."%' AND `mask`>='".($mask+6)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("7C", $row);
@@ -1863,7 +1863,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01111000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01111100", $mask)."%' AND `mask`>='".($mask+6)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01111101", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("7D", $row);
@@ -1881,7 +1881,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00101000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00101010", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("2A", $row);
@@ -1897,7 +1897,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00101000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00101010", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00101011", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("2B", $row);
@@ -1913,7 +1913,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00101000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00101100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00101110", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("2E", $row);
@@ -1931,7 +1931,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00101100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00101110", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00101111", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("2F", $row);
@@ -1947,7 +1947,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00110000", $mask)."%' AND `mask`='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00111000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00111010", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("3A", $row);
@@ -1965,7 +1965,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00111000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00111010", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00111011", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("3B", $row);
@@ -1983,7 +1983,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00111000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00111100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00111110", $mask)."%' AND `mask`>='".($mask+7)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("3E", $row);
@@ -2003,7 +2003,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00111100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00111110", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "00111111", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("3F", $row);
@@ -2019,7 +2019,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01101000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01101010", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("6A", $row);
@@ -2037,7 +2037,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01101000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01101010", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01101011", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("6B", $row);
@@ -2055,7 +2055,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01101000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01101100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01101110", $mask)."%' AND `mask`>='".($mask+7)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("6E", $row);
@@ -2075,7 +2075,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01101100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01101110", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01101111", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("6F", $row);
@@ -2094,7 +2094,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01110000", $mask)."%' AND `mask`='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01111000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01111010", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("7A", $row);
@@ -2114,7 +2114,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01111000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01111010", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01111011", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("7B", $row);
@@ -2134,7 +2134,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01111000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01111100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01111110", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("7E", $row);
@@ -2156,7 +2156,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01111100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01111110", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "01111111", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("7F", $row);
@@ -2169,7 +2169,7 @@ $mask = $gMask;
 		# 80: 33..40
 		$q="SELECT * FROM  `ipamv6` WHERE (
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000000", $mask)."%' AND `mask`>'".($mask)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("80", $row);
@@ -2180,7 +2180,7 @@ $mask = $gMask;
 		$q="SELECT * FROM  `ipamv6` WHERE ( 
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000001", $mask)."%' AND `mask`>='".($mask+8)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("81", $row);
@@ -2191,7 +2191,7 @@ $mask = $gMask;
 		$q="SELECT * FROM  `ipamv6` WHERE ( 
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000100", $mask)."%' AND `mask`>='".($mask+6)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("84", $row);
@@ -2204,7 +2204,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000100", $mask)."%' AND `mask`>='".($mask+6)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000101", $mask)."%' AND `mask`>='".($mask+8)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("85", $row);
@@ -2215,7 +2215,7 @@ $mask = $gMask;
 		$q="SELECT * FROM  `ipamv6` WHERE ( 
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10010000", $mask)."%' AND `mask`>='".($mask+4)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("90", $row);
@@ -2228,7 +2228,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10010000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10010001", $mask)."%' AND `mask`>='".($mask+8)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("91", $row);
@@ -2241,7 +2241,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10010000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10010100", $mask)."%' AND `mask`>='".($mask+6)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("94", $row);
@@ -2256,7 +2256,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10010000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10010100", $mask)."%' AND `mask`>='".($mask+6)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10010101", $mask)."%' AND `mask`>='".($mask+8)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("95", $row);
@@ -2266,7 +2266,7 @@ $mask = $gMask;
 		$q="SELECT * FROM  `ipamv6` WHERE ( 
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000000", $mask)."%' AND `mask`='".($mask+1)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11000000", $mask)."%' AND `mask`>='".($mask+2)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("C0", $row);
@@ -2278,7 +2278,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000000", $mask)."%' AND `mask`='".($mask+1)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11000000", $mask)."%' AND `mask`>='".($mask+2)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11000001", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("C1", $row);
@@ -2291,7 +2291,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000000", $mask)."%' AND `mask`='".($mask+1)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11000000", $mask)."%' AND `mask`>='".($mask+2)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11000100", $mask)."%' AND `mask`>='".($mask+6)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("C4", $row);
@@ -2305,7 +2305,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11000000", $mask)."%' AND `mask`>='".($mask+2)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11000100", $mask)."%' AND `mask`>='".($mask+6)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11000101", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("C5", $row);
@@ -2318,7 +2318,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000000", $mask)."%' AND `mask`='".($mask+1)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11000000", $mask)."%' AND `mask`>='".($mask+2)."' AND `mask`<='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11010000", $mask)."%' AND `mask`>='".($mask+4)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("D0", $row);
@@ -2332,7 +2332,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11000000", $mask)."%' AND `mask`>='".($mask+2)."' AND `mask`<='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11010000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11010001", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("D1", $row);
@@ -2346,7 +2346,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11000000", $mask)."%' AND `mask`>='".($mask+2)."' AND `mask`<='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11010000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11010100", $mask)."%' AND `mask`>='".($mask+6)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("D4", $row);
@@ -2362,7 +2362,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11010000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11010100", $mask)."%' AND `mask`>='".($mask+6)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11010101", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("D5", $row);
@@ -2377,7 +2377,7 @@ $mask = $gMask;
 		$q="SELECT * FROM  `ipamv6` WHERE ( 
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000010", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("82", $row);
@@ -2390,7 +2390,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000010", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000011", $mask)."%' AND `mask`>='".($mask+8)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("83", $row);
@@ -2403,7 +2403,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000110", $mask)."%' AND `mask`>='".($mask+7)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("86", $row);
@@ -2418,7 +2418,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000110", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000111", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("87", $row);
@@ -2431,7 +2431,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10010000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10010010", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("92", $row);
@@ -2446,7 +2446,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10010000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10010010", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10010011", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("93", $row);
@@ -2461,7 +2461,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10010000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10010100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10010110", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("96", $row);
@@ -2478,7 +2478,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10010100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10010110", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10010111", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("97", $row);
@@ -2491,7 +2491,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000000", $mask)."%' AND `mask`='".($mask+1)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11000000", $mask)."%' AND `mask`>='".($mask+2)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11000010", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("C2", $row);
@@ -2506,7 +2506,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11000000", $mask)."%' AND `mask`>='".($mask+2)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11000010", $mask)."%' AND `mask`='".($mask+7)."' OR 
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11000011", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("C3", $row);
@@ -2521,7 +2521,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11000000", $mask)."%' AND `mask`>='".($mask+2)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11000100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11000110", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("C6", $row);
@@ -2537,7 +2537,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11000100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11000110", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11000111", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("C7", $row);
@@ -2552,7 +2552,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11000000", $mask)."%' AND `mask`>='".($mask+2)."' AND `mask`<='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11010000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11010010", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("D2", $row);
@@ -2568,7 +2568,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11010000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11010010", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11010011", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("D3", $row);
@@ -2584,7 +2584,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11010000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11010100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11010110", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("D6", $row);
@@ -2602,7 +2602,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11010100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11010110", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11010111", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("D7", $row);
@@ -2617,7 +2617,7 @@ $mask = $gMask;
 		$q="SELECT * FROM  `ipamv6` WHERE ( 
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10001000", $mask)."%' AND `mask`>='".($mask+5)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("88", $row);
@@ -2629,7 +2629,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10001000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10001001", $mask)."%' AND `mask`>='".($mask+8)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("89", $row);
@@ -2642,7 +2642,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10001000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10001100", $mask)."%' AND `mask`>='".($mask+6)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("8C", $row);
@@ -2657,7 +2657,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10001000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10001100", $mask)."%' AND `mask`>='".($mask+6)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10001101", $mask)."%' AND `mask`>='".($mask+8)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("8D", $row);
@@ -2670,7 +2670,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10010000", $mask)."%' AND `mask`='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10011000", $mask)."%' AND `mask`>='".($mask+5)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("98", $row);
@@ -2685,7 +2685,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10010000", $mask)."%' AND `mask`='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10011000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10011001", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("99", $row);
@@ -2700,7 +2700,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10010000", $mask)."%' AND `mask`='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10011000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10011100", $mask)."%' AND `mask`>='".($mask+6)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("9C", $row);
@@ -2717,7 +2717,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10011000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10011100", $mask)."%' AND `mask`>='".($mask+6)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10011101", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("9D", $row);
@@ -2729,7 +2729,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000000", $mask)."%' AND `mask`='".($mask+1)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11000000", $mask)."%' AND `mask`>='".($mask+2)."' AND `mask`<='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11001000", $mask)."%' AND `mask`>='".($mask+5)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("C8", $row);
@@ -2743,7 +2743,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11000000", $mask)."%' AND `mask`>='".($mask+2)."' AND `mask`<='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11001000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11001001", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("C9", $row);
@@ -2757,7 +2757,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11000000", $mask)."%' AND `mask`>='".($mask+2)."' AND `mask`<='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11001000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11001100", $mask)."%' AND `mask`>='".($mask+6)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("CC", $row);
@@ -2774,7 +2774,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11001000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11001100", $mask)."%' AND `mask`>='".($mask+6)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11001101", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("CD", $row);
@@ -2788,7 +2788,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11000000", $mask)."%' AND `mask`>='".($mask+2)."' AND `mask`<='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11010000", $mask)."%' AND `mask`='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11011000", $mask)."%' AND `mask`>='".($mask+5)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("D8", $row);
@@ -2804,7 +2804,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11010000", $mask)."%' AND `mask`='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11011000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11011001", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("D9", $row);
@@ -2821,7 +2821,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11010000", $mask)."%' AND `mask`='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11011000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11011100", $mask)."%' AND `mask`>='".($mask+6)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("DC", $row);
@@ -2839,7 +2839,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11011000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11011100", $mask)."%' AND `mask`>='".($mask+6)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11011101", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("DD", $row);
@@ -2857,7 +2857,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10001000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10001010", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("8A", $row);
@@ -2873,7 +2873,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10001000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10001010", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10001011", $mask)."%' AND `mask`>='".($mask+8)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("8B", $row);
@@ -2888,7 +2888,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10001000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10001100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10001110", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("8E", $row);
@@ -2905,7 +2905,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10001100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10001110", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10001111", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("8F", $row);
@@ -2920,7 +2920,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10010000", $mask)."%' AND `mask`='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10011000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10011010", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("9A", $row);
@@ -2937,7 +2937,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10011000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10011010", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10011011", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("9B", $row);
@@ -2954,7 +2954,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10011000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10011100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10011110", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("9E", $row);
@@ -2973,7 +2973,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10011100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10011110", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10011111", $mask)."%' AND `mask`>='".($mask+8)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("9F", $row);
@@ -2987,7 +2987,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11000000", $mask)."%' AND `mask`>='".($mask+2)."' AND `mask`<='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11001000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11001010", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("CA", $row);
@@ -3003,7 +3003,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11001000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11001010", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11001011", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("CB", $row);
@@ -3020,7 +3020,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11001000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11001100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11001110", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("CE", $row);
@@ -3039,7 +3039,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11001100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11001110", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11001111", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("CF", $row);
@@ -3055,7 +3055,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11010000", $mask)."%' AND `mask`='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11011000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11011010", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("DA", $row);
@@ -3073,7 +3073,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11011000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+6)."'OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11011010", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11011011", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("DB", $row);
@@ -3091,7 +3091,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11011000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11011100", $mask)."%' AND `mask`='".($mask+6)."' OR 
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11011110", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("DE", $row);
@@ -3111,7 +3111,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11011100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11011110", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11011111", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("DF", $row);
@@ -3126,7 +3126,7 @@ $mask = $gMask;
 		$q="SELECT * FROM  `ipamv6` WHERE ( 
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+2)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10100000", $mask)."%' AND `mask`>='".($mask+3)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("A0", $row);
@@ -3139,7 +3139,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+2)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10100001", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("A1", $row);
@@ -3152,7 +3152,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+2)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10100100", $mask)."%' AND `mask`>='".($mask+6)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("A4", $row);
@@ -3167,7 +3167,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10100100", $mask)."%' AND `mask`>='".($mask+6)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10100101", $mask)."%' AND `mask`>='".($mask+8)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("A5", $row);
@@ -3181,7 +3181,7 @@ $mask = $gMask;
 			`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+2)."'  OR 
 			`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10100000", $mask)."%' AND `mask`='".($mask+3)."'  OR 
 			`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10110000", $mask)."%' AND `mask`>='".($mask+4)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("B0", $row);
@@ -3195,7 +3195,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10100000", $mask)."%' AND `mask`='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10110000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10110001", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("B1", $row);
@@ -3209,7 +3209,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10100000", $mask)."%' AND `mask`='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10110000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10110100", $mask)."%' AND `mask`>='".($mask+6)."' )
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("B4", $row);
@@ -3225,7 +3225,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10110000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10110100", $mask)."%' AND `mask`>='".($mask+6)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10110101", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("B5", $row);
@@ -3238,7 +3238,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000000", $mask)."%' AND `mask`='".($mask+1)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11000000", $mask)."%' AND `mask`='".($mask+2)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11100000", $mask)."%' AND `mask`>='".($mask+3)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("E0", $row);
@@ -3252,7 +3252,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11000000", $mask)."%' AND `mask`='".($mask+2)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11100001", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("E1", $row);
@@ -3266,7 +3266,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11000000", $mask)."%' AND `mask`='".($mask+2)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11100100", $mask)."%' AND `mask`>='".($mask+6)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("E4", $row);
@@ -3282,7 +3282,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11100100", $mask)."%' AND `mask`>='".($mask+6)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11100101", $mask)."%' AND `mask`>='".($mask+8)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("E5", $row);
@@ -3301,7 +3301,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11000000", $mask)."%' AND `mask`='".($mask+2)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11100000", $mask)."%' AND `mask`='".($mask+3)."'  OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11110000", $mask)."%' AND `mask`>='".($mask+4)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("F0", $row);
@@ -3317,7 +3317,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11100000", $mask)."%' AND `mask`='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11110000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11110001", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("F1", $row);
@@ -3333,7 +3333,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11100000", $mask)."%' AND `mask`='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11110000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11110100", $mask)."%' AND `mask`>='".($mask+6)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("F4", $row);
@@ -3351,7 +3351,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11110000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11110100", $mask)."%' AND `mask`>='".($mask+6)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11110101", $mask)."%' AND `mask`>='".($mask+8)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("F5", $row);
@@ -3369,7 +3369,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+2)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10100010", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("A2", $row);
@@ -3384,7 +3384,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10100010", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10100011", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("A3", $row);
@@ -3398,7 +3398,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10100100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10100110", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("A6", $row);
@@ -3415,7 +3415,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10100100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10100110", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10100111", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("A7", $row);
@@ -3430,7 +3430,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10100000", $mask)."%' AND `mask`='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10110000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10110010", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("B2", $row);
@@ -3446,7 +3446,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10110000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10110010", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10110011", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("B3", $row);
@@ -3462,7 +3462,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10110000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10110100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10110110", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("B6", $row);
@@ -3480,7 +3480,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10110100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10110110", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10110111", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("B7", $row);
@@ -3494,7 +3494,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11000000", $mask)."%' AND `mask`='".($mask+2)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11100010", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("E2", $row);
@@ -3510,7 +3510,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11100010", $mask)."%' AND `mask`='".($mask+7)."' OR 
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11100011", $mask)."%' AND `mask`>='".($mask+8)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("E3", $row);
@@ -3526,7 +3526,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11100100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11100110", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("E6", $row);
@@ -3544,7 +3544,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11100100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11100110", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11100111", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("E7", $row);
@@ -3560,7 +3560,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11100000", $mask)."%' AND `mask`='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11110000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11110010", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("F2", $row);
@@ -3578,7 +3578,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11110000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11110010", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11110011", $mask)."%' AND `mask`>='".($mask+8)."') 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("F3", $row);
@@ -3596,7 +3596,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11110000", $mask)."%' AND `mask`>='".($mask+4)."' AND `mask`<='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11110100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11110110", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("F6", $row);
@@ -3616,7 +3616,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11110100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11110110", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11110111", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("F7", $row);
@@ -3633,7 +3633,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10000000", $mask)."%' AND `mask`>='".($mask+1)."' AND `mask`<='".($mask+2)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10101000", $mask)."%' AND `mask`>='".($mask+5)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("A8", $row);
@@ -3647,7 +3647,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10101000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10101001", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("A9", $row);
@@ -3661,7 +3661,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10101000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10101100", $mask)."%' AND `mask`>='".($mask+6)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("AC", $row);
@@ -3677,7 +3677,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10101000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10101100", $mask)."%' AND `mask`>='".($mask+6)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10101101", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("AD", $row);
@@ -3691,7 +3691,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10100000", $mask)."%' AND `mask`='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10110000", $mask)."%' AND `mask`='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10111000", $mask)."%' AND `mask`>='".($mask+5)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("B8", $row);
@@ -3707,7 +3707,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10110000", $mask)."%' AND `mask`='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10111000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10111001", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("B9", $row);
@@ -3723,7 +3723,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10110000", $mask)."%' AND `mask`='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10111000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10111100", $mask)."%' AND `mask`>='".($mask+6)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("BC", $row);
@@ -3741,7 +3741,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10111000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10111100", $mask)."%' AND `mask`>='".($mask+6)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10111101", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("BD", $row);
@@ -3756,7 +3756,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11000000", $mask)."%' AND `mask`='".($mask+2)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11101000", $mask)."%' AND `mask`>='".($mask+5)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("E8", $row);
@@ -3772,7 +3772,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11101000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11101001", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("E9", $row);
@@ -3788,7 +3788,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11101000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11101100", $mask)."%' AND `mask`>='".($mask+6)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("EC", $row);
@@ -3806,7 +3806,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11101000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11101100", $mask)."%' AND `mask`>='".($mask+6)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11101101", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("ED", $row);
@@ -3822,7 +3822,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11100000", $mask)."%' AND `mask`='".($mask+3)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11110000", $mask)."%' AND `mask`='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11111000", $mask)."%' AND `mask`>='".($mask+5)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("F8", $row);
@@ -3840,7 +3840,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11110000", $mask)."%' AND `mask`='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11111000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11111001", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("F9", $row);
@@ -3858,7 +3858,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11110000", $mask)."%' AND `mask`='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11111000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11111100", $mask)."%' AND `mask`>='".($mask+6)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("FC", $row);
@@ -3878,7 +3878,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11111000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11111100", $mask)."%' AND `mask`>='".($mask+6)."' AND `mask`<='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11111101", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("FD", $row);
@@ -3896,7 +3896,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10101000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10101010", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("AA", $row);
@@ -3912,7 +3912,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10101000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10101010", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10101011", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("AB", $row);
@@ -3928,7 +3928,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10101000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10101100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10101110", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("AE", $row);
@@ -3946,7 +3946,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10101100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10101110", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10101111", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("AF", $row);
@@ -3962,7 +3962,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10110000", $mask)."%' AND `mask`='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10111000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10111010", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("BA", $row);
@@ -3980,7 +3980,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10111000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10111010", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10111011", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("BB", $row);
@@ -3998,7 +3998,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10111000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10111100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10111110", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("BE", $row);
@@ -4018,7 +4018,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10111100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10111110", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "10111111", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("BF", $row);
@@ -4034,7 +4034,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11100000", $mask)."%' AND `mask`>='".($mask+3)."' AND `mask`<='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11101000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11101010", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("EA", $row);
@@ -4052,7 +4052,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11101000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11101010", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11101011", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("EB", $row);
@@ -4070,7 +4070,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11101000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11101100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11101110", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("EE", $row);
@@ -4090,7 +4090,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11101100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11101110", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11101111", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("EF", $row);
@@ -4109,7 +4109,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11110000", $mask)."%' AND `mask`='".($mask+4)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11111000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11111010", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("FA", $row);
@@ -4129,7 +4129,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11111000", $mask)."%' AND `mask`>='".($mask+5)."' AND `mask`<='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11111010", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11111011", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("FB", $row);
@@ -4149,7 +4149,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11111000", $mask)."%' AND `mask`='".($mask+5)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11111100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11111110", $mask)."%' AND `mask`>='".($mask+7)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("FE", $row);
@@ -4171,7 +4171,7 @@ $mask = $gMask;
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11111100", $mask)."%' AND `mask`='".($mask+6)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11111110", $mask)."%' AND `mask`='".($mask+7)."' OR
 		`network_bin` LIKE  '".substr_replace($ipv6->binNetwork(), "11111111", $mask)."%' AND `mask`>='".($mask+8)."' ) 
-		ORDER by mask LIMIT 1;";
+		ORDER by mask ".NET_ORDER." LIMIT 1;";
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("FF", $row);
