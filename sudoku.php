@@ -33,7 +33,7 @@ navBar();
 							echo strtoupper($n[$i]);
 							if((($i+1)) % 2 == 0)
 								echo ":";
-							}
+						}
 						?><input size="2" id="form_network" type="text" name="newNetworkHex" disabled><?php if($gMask%16 == 0){echo " 00";}?>:: / 
 						<input size="2" id="form_maska" type="text" disabled>
 					</td>
@@ -45,8 +45,8 @@ navBar();
 				<tr>
 					<td>color:</td>
 					<td>
-					<script type="text/javascript" src="jscolor/jscolor.js"></script>
-					<input id="form_color" class="color {hash:true,pickerPosition:'right',pickerClosable:true}" type="text" name="newColour" value="#FFFFAA" disabled>
+						<script type="text/javascript" src="jscolor/jscolor.js"></script>
+						<input id="form_color" class="color {hash:true,pickerPosition:'right',pickerClosable:true}" type="text" name="newColour" value="#FFFFAA" disabled>
 					</td>
 				</tr>
 				<tr>
@@ -557,7 +557,7 @@ $mask = $gMask;
 		$res = $sql->query($q);
 		$row = $sql->array_result($res);
 		sudoku_cell("53", $row);
-		
+
 		# 00: 33
 		# 40: 34..35
 		# 50: 36..37

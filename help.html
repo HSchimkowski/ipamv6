@@ -1,138 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IPAMv6 Help</title>
-    <style>
-        .help-content {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-            line-height: 1.6;
-            font-family: 'Century Gothic', Verdana, Arial;
-        }
+<h1>Information</h1>
+<h2>System requirements</h2>
+<p>This Tool is written in languages, which are very popular and so you do not need vey special systems for it :)
 
-        .help-content section {
-            margin-bottom: 30px;
-        }
+<h3>Server</h3>
+<p>on the server side you need a Webserver running PHP5 an an MySQL Database.</p>
+<p>If you want to protect the System agains unauthorized Access you can simply protect the published folder on your webserver with standard tool like .htaccess or something simmilar</p>
+<p>All this Requirements comes with the most popular Linux distrubutions. Ex. Debian Linux.</p>
 
-        .help-content h1 {
-            color: #0b2e66;
-            margin-bottom: 25px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #0b2e66;
-        }
-
-        .help-content h2 {
-            color: #164393;
-            margin: 20px 0 15px;
-        }
-
-        .help-content h3 {
-            color: #333;
-            margin: 15px 0 10px;
-        }
-
-        .help-content p {
-            margin-bottom: 15px;
-            color: #444;
-        }
-
-        .help-content ul, 
-        .help-content ol {
-            margin: 15px 0 15px 30px;
-            color: #444;
-        }
-
-        .help-content li {
-            margin-bottom: 8px;
-        }
-
-        .help-content a {
-            color: #0b2e66;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .help-content a:hover {
-            color: #164393;
-            text-decoration: underline;
-        }
-
-        .install-steps {
-            background-color: #f8f8f8;
-            padding: 20px 40px;
-            border-radius: 4px;
-            border-left: 4px solid #0b2e66;
-        }
-
-        .todo {
-            color: #888;
-            font-style: italic;
-        }
-
-        @media (max-width: 768px) {
-            .help-content {
-                padding: 15px;
-            }
-
-            .install-steps {
-                padding: 15px 30px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <article class="help-content">
-        <section class="info-section">
-            <h1>Information</h1>
-            
-            <section class="requirements">
-                <h2>System requirements</h2>
-                <p>This Tool is written in common web technologies, making it compatible with most standard systems.</p>
-
-                <section class="server-requirements">
-                    <h3>Server</h3>
-                    <p>On the server side you need:</p>
-                    <ul>
-                        <li>A web server running PHP5</li>
-                        <li>MySQL Database</li>
-                    </ul>
-                    <p>To protect the system against unauthorized access, you can secure the published folder on your webserver using standard tools like .htaccess.</p>
-                    <p>All these requirements come with most popular Linux distributions (e.g., Debian Linux).</p>
-                </section>
-
-                <section class="client-requirements">
-                    <h3>Client</h3>
-                    <p>On the client side, you only need:</p>
-                    <ul>
-                        <li>A web browser with JavaScript enabled</li>
-                        <li>HTML5 support</li>
-                    </ul>
-                    <p>This tool has been tested with Google Chrome and Mozilla Firefox, but other modern browsers should work as well.</p>
-                </section>
-            </section>
-
-            <section class="installation">
-                <h2>Installation</h2>
-                <ol class="install-steps">
-                    <li>Download application from <a href="http://ipamv6.schimkowski.net/download/IPAMv6.zip" target="_blank">http://ipamv6.schimkowski.net/download/IPAMv6.zip</a></li>
-                    <li>Unzip and copy to your webserver</li>
-                    <li>Import IPAMv6 database structure into MySQL</li>
-                    <li>Configure settings in config.inc.php</li>
-                    <li>Access your IPAMv6 installation via http://[your.servers.address]/IPAMv6</li>
-                </ol>
-            </section>
-        </section>
-
-        <section class="help-section">
-            <h1>Help</h1>
-            <section class="ipv6-design">
-                <h2>How to make a good IPv6 Address Design</h2>
-                <p class="todo">...toDo...</p>
-            </section>
-        </section>
-    </article>
-</body>
-</html>
+<h3>Client</h3>
+<p>On Client-Side you only need a Webbrowser with enabled Javascript and HTML5 Support to access the Webserver.</p>
+<p>This tool has been testet with Google Chrome and Mozilla Firefox, but other browsers schuld work as well.</p>
+<h2>installation</h2>
+<ol>
+	<li>Download application from <a href="http://ipamv6.schimkowski.net/download/IPAMv6.zip" target="_blank">http://ipamv6.schimkowski.net/download/IPAMv6.zip</a>	
+	<li>unzip and copy to your webserver
+	<li>import ipamv6 database-structure into MySQL
+	<li>change values into config.inc.php
+	<li>access your IPAMv6 instalation vith your webbrowser via http://[your.servers.address]/IPAMv6 
+</ol>
+<h1>Help</h1>
+<h2>Howto make a good IPv6 Address Design</h2>
+<p>...toDo...</p>
