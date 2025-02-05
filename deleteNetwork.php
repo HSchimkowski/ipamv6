@@ -20,19 +20,30 @@ if($row['id']!="")
 	$hasSubnet=true;
 
 ?>
-<form action="./deleteNetworks.php" method="get">
 
-<input type="hidden" name="id"  value="<?php echo $id; ?>">
-<input type="hidden" name="url" value="<?php echo $_SERVER["HTTP_REFERER"]; ?>">
-Do you really want to delete <?php echo $ip->getMyCompressedAddress(); ?>/<?php echo $ip->myPrefix; ?>?<br /><br />
+<form action="./deleteNetworks.php" method="get" class="delete-network-form">
+    <input type="hidden" name="id" value="<?php echo $id; ?>">
+    <input type="hidden" name="url" value="<?php echo $_SERVER["HTTP_REFERER"]; ?>">
+    
+    <div class="confirmation-message">
+        Do you really want to delete <?php echo $ip->getMyCompressedAddress(); ?>/<?php echo $ip->myPrefix; ?>?
+    </div>
 
-<?php 
-if($hasSubnet)
-{?>
-	<input type="checkbox" name="subnets" value="1"> also delete <b>all</b> subnets!<br /><br />
-<?php }
-else {?>
-	<input type="hidden" name="subnets" value="0">
-<?php } ?>
-<input type="submit" value="yes"> <input type="button" value="cancel" onclick="history.go(-1);">
+    <div class="form-actions">
+        <?php if($hasSubnet) { ?>
+            <div class="subnet-option">
+                <label>
+                    <input type="checkbox" name="subnets" value="1">
+                    also delete <b>all</b> subnets!
+                </label>
+            </div>
+        <?php } else { ?>
+            <input type="hidden" name="subnets" value="0">
+        <?php } ?>
+
+        <div class="button-group">
+            <input type="submit" value="Yes" class="btn btn-danger">
+            <input type="button" value="Cancel" onclick="history.go(-1);" class="btn btn-secondary">
+        </div>
+    </div>
 </form>
