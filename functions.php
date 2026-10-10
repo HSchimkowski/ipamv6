@@ -1,21 +1,206 @@
 <?php
 
+// ---------------------------------------------------------------------------
+// input validation
+// ---------------------------------------------------------------------------
+
+/**
+ * Returns the netmask as integer if it is a whole number between 0 and $max,
+ * otherwise null.
+ */
+function valid_mask($value, $max = 128)
+{
+	if (!is_string($value) && !is_int($value))
+		return null;
+	$value = (string)$value;
+	if ($value === '' || !ctype_digit($value) || strlen($value) > 3)
+		return null;
+	$value = (int)$value;
+	return ($value <= $max) ? $value : null;
+}
+
+/**
+ * Returns the network if it is a binary string of exactly 128 bits
+ * (or of up to 128 bits if $exact is false), otherwise null.
+ */
+function valid_bin_network($value, $exact = true)
+{
+	if (!is_string($value))
+		return null;
+	$pattern = $exact ? '/^[01]{128}$/' : '/^[01]{0,128}$/';
+	return preg_match($pattern, $value) ? $value : null;
+}
+
+/**
+ * Returns the IPv6 address if it is valid, otherwise null.
+ */
+function valid_hex_network($value)
+{
+	if (!is_string($value) || strpos($value, ':') === false)
+		return null;
+	$packed = @inet_pton($value);
+	return ($packed !== false && strlen($packed) == 16) ? $value : null;
+}
+
+/**
+ * Returns the database id as integer if it is a positive whole number, otherwise null.
+ */
+function valid_id($value)
+{
+	if (!is_string($value) && !is_int($value))
+		return null;
+	$value = (string)$value;
+	if ($value === '' || !ctype_digit($value) || strlen($value) > 10)
+		return null;
+	return (int)$value;
+}
+
+/**
+ * Returns the color if it has the form #RRGGBB, otherwise $default.
+ */
+function valid_color($value, $default = '#FFFFAA')
+{
+	return (is_string($value) && preg_match('/^#[0-9A-Fa-f]{6}$/', $value)) ? $value : $default;
+}
+
+/**
+ * Reads a network from the request (hex or binary notation) and returns an
+ * initialized IPv6 object, or null if network or netmask are invalid.
+ */
+function network_from_request($network, $mask, $format)
+{
+	$mask = valid_mask($mask);
+	if ($mask === null)
+		return null;
+
+	$ip = new IPv6();
+	if ($format == 'hex')
+	{
+		if (valid_hex_network($network) === null || !$ip->initHex($network, $mask))
+			return null;
+	}
+	else
+	{
+		if (valid_bin_network($network) === null)
+			return null;
+		$ip->initBinary($network, $mask);
+	}
+	return $ip;
+}
+
+/**
+ * Stops the request with HTTP status 400 and a short error message.
+ */
+function bad_request($message)
+{
+	http_response_code(400);
+	header('Content-Type: text/plain; charset=utf-8');
+	echo $message;
+	exit();
+}
+
+// ---------------------------------------------------------------------------
+// CSRF protection
+// ---------------------------------------------------------------------------
+
+/**
+ * Starts the session that holds the CSRF token.
+ */
+function start_session()
+{
+	if (session_status() == PHP_SESSION_ACTIVE)
+		return;
+	session_set_cookie_params(array(
+		'httponly' => true,
+		'samesite' => 'Lax',
+		'secure'   => !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off',
+	));
+	session_start();
+}
+
+function csrf_token()
+{
+	start_session();
+	if (empty($_SESSION['csrf_token']))
+		$_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+	return $_SESSION['csrf_token'];
+}
+
+/**
+ * Hidden form field with the CSRF token. Every form that changes data must contain it.
+ */
+function csrf_field()
+{
+	return '<input type="hidden" name="csrf_token" value="'.e(csrf_token()).'">';
+}
+
+/**
+ * Stops the request unless it is a POST request with a valid CSRF token.
+ */
+function require_post_with_csrf()
+{
+	if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST')
+	{
+		header('Allow: POST');
+		http_response_code(405);
+		exit('Method not allowed.');
+	}
+	$token = $_POST['csrf_token'] ?? '';
+	if (!is_string($token) || !hash_equals(csrf_token(), $token))
+	{
+		http_response_code(403);
+		exit('Invalid or expired form. Please reload the page and try again.');
+	}
+}
+
+/**
+ * Returns a redirect target inside this application. Only the query string of
+ * $url is kept, so the redirect can never lead to another site.
+ */
+function local_redirect_url($url)
+{
+	$query = is_string($url) ? (string)parse_url($url, PHP_URL_QUERY) : '';
+	return ($query === '') ? './' : './?'.$query;
+}
+
+// ---------------------------------------------------------------------------
+// output
+// ---------------------------------------------------------------------------
+
+/**
+ * Escapes a value for HTML output (text and attribute values).
+ */
+function e($value)
+{
+	return htmlspecialchars((string)$value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+}
+
+/**
+ * Returns the color for a style attribute, or an empty string if it is no #RRGGBB value.
+ */
+function e_color($value)
+{
+	return e(valid_color($value, ''));
+}
+
 function sudoku_cell($field, $row)
 {
 	global $MyIPv6;
 	global $gMask;
+	if (!$row)
+		$row = array('id' => '', 'mask' => 0, 'color' => '', 'description' => '');
 	?>
 <td 
 	id="cell<?php echo $field; ?>" 
 	class="field_<?php echo $field; ?>" 
-	style="background-color: <?php if($row['color']=="" || $row['mask'] > $gMask+8){echo "white";}else{echo $row['color']; }?>" 
+	style="background-color: <?php if(e_color($row['color'])=="" || $row['mask'] > $gMask+8){echo "white";}else{echo e_color($row['color']); }?>" 
 	<?php if($row['id']=='' || $row['mask'] > $gMask+8){?>	onclick="selectCell('<?php echo $field; ?>')" onMouseOver="highlightCell('<?php echo $field; ?>')"<?php }?>>
-	<?php if($row['id']!="" && $_GET['mask']<'120' && $row['mask'] < $gMask+9){?>
-		<a href="./?action=sudoku&amp;mask=<?php echo ($MyIPv6->myPrefix + 8); ?>&amp;network=<?php	echo substr_replace($MyIPv6->binNetwork(), myHex2Bin($field), $MyIPv6->myPrefix, 8);?>"	title="<?php echo $row['description']; ?>">
+	<?php if($row['id']!="" && $gMask < 120 && $row['mask'] < $gMask+9){?>
+		<a href="./?action=sudoku&amp;mask=<?php echo ($MyIPv6->myPrefix + 8); ?>&amp;network=<?php	echo substr_replace($MyIPv6->binNetwork(), myHex2Bin($field), $MyIPv6->myPrefix, 8);?>"	title="<?php echo e($row['description']); ?>">
 			<?php 
 	}
 	echo $field; 
-	if($row['id']!="" && $_GET['mask']<'120' && $row['mask'] < $gMask+9){
+	if($row['id']!="" && $gMask < 120 && $row['mask'] < $gMask+9){
 	?>
 		</a><?php
 	}
@@ -45,8 +230,8 @@ function left()
 			$ipv6 = new IPv6();
 			$ipv6->initHex($row['network'], $row['mask']);
 			?><li>
-				<a 	href="./?action=sudoku&amp;mask=<?php echo floor($ipv6->myPrefix/8)*8; ?>&amp;network=<?php echo $ipv6->binNetwork() ?>" title="<?php echo $row['description']; ?>">
-					<?php echo $ipv6->hexCompressedNetwork()."/".$row['mask']; ?>
+				<a 	href="./?action=sudoku&amp;mask=<?php echo min(120, floor($ipv6->myPrefix/8)*8); ?>&amp;network=<?php echo $ipv6->binNetwork() ?>" title="<?php echo e($row['description']); ?>">
+					<?php echo $ipv6->hexCompressedNetwork()."/".e($row['mask']); ?>
 				</a>
 		<?php }
 		?>
@@ -63,20 +248,12 @@ function left()
 	<?php 
 }
 
-function existNetwork($net, $mask)
+function existNetwork($net, $mask, $maxMask)
 {
 	global $sql;
-	$q = "SELECT `id` from `ipamv6` WHERE `network_bin` LIKE '".substr($net, 0, $mask)."%' AND `mask` > '".$mask."' AND `mask` < '".($_GET['mask']+8)."' limit 1 ;";
-	$res = $sql->query($q);
-	$row = $sql->array_result($res);
-	if($sql->num_result()>0)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	$q = "SELECT `id` from `ipamv6` WHERE `network_bin` LIKE ? AND `mask` > ? AND `mask` < ? limit 1 ;";
+	$res = $sql->query($q, array(substr($net, 0, $mask)."%", $mask, $maxMask));
+	return $sql->num_result($res) > 0;
 }
 
 function navBar()
@@ -91,8 +268,8 @@ function navBar()
 	// find my Root Network
 	for($i=$gMask; $i>=0; $i--)
 	{
-		$q = "SELECT * FROM `ipamv6` WHERE `network_bin` LIKE '".substr($gNetwork, 0, $i)."%' ORDER BY mask; ";
-		$res = $sql->query($q);
+		$q = "SELECT * FROM `ipamv6` WHERE `network_bin` LIKE ? ORDER BY mask; ";
+		$res = $sql->query($q, array(substr($gNetwork, 0, $i)."%"));
 		if($row = $sql->array_result($res))
 		{
 			$root->initBinary($row['network_bin'], $row['mask']);
@@ -104,8 +281,8 @@ function navBar()
 	// get Parent Network
 	for($i=$gMask; $i>$root->myPrefix; $i--)
 	{
-		$q = "SELECT * FROM `ipamv6` WHERE `network_bin` LIKE '".substr($gNetwork, 0, $i)."%' AND `mask` <= '".$gMask."' ORDER BY mask DESC; ";
-		$res = $sql->query($q);
+		$q = "SELECT * FROM `ipamv6` WHERE `network_bin` LIKE ? AND `mask` <= ? ORDER BY mask DESC; ";
+		$res = $sql->query($q, array(substr($gNetwork, 0, $i)."%", $gMask));
 		if($row = $sql->array_result($res))
 		{
 			$par->initBinary($row['network_bin'], $row['mask']);
@@ -168,8 +345,8 @@ function navBar()
 		
 	}
 	?></a>/<?php echo $cur->myPrefix; ?>
-	<span style="background: <?php echo $row['color']; ?>">
-		(<?php echo $row['description']; ?>)
+	<span style="background: <?php echo e_color($row['color'] ?? ''); ?>">
+		(<?php echo e($row['description'] ?? ''); ?>)
 	</span>
 	</div>
 	<?php 

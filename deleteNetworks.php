@@ -2,26 +2,35 @@
 // load configfile
 require_once 'config.inc.php';
 require_once 'class/mysq.class.php';
+require_once 'functions.php';
 
 // start database connection
-$sql = new mysql("localhost","user","passwort","datenbank"); 
+$sql = new mysql();
 
-if($_GET['subnets']!="1")
+require_post_with_csrf();
+
+$id = valid_id($_POST['id'] ?? null);
+if ($id === null)
+	bad_request("Invalid network!");
+
+if(($_POST['subnets'] ?? '') != "1")
 {
-	$q = "DELETE FROM `ipamv6` WHERE `id`='".$_GET['id']."';";
-	$res = $sql->query($q);	
+	$q = "DELETE FROM `ipamv6` WHERE `id`= ?;";
+	$res = $sql->query($q, array($id));
 }	
 else
 {	
-	$q = "SELECT * FROM `ipamv6` WHERE `id` = '".$_GET['id']."';";
-	$res = $sql->query($q);
+	$q = "SELECT * FROM `ipamv6` WHERE `id` = ?;";
+	$res = $sql->query($q, array($id));
 	$row = $sql->array_result($res);
 
-	// check if there are subnets
-	$q="DELETE FROM `ipamv6` WHERE `network_bin` LIKE '".substr($row['network_bin'], 0, $row['mask'])."%' AND `mask` >= '".$row['mask']."';";
-	$res = $sql->query($q);
-	#$row = $sql->array_result($res);
+	// delete the network and all its subnets
+	if ($row)
+	{
+		$q="DELETE FROM `ipamv6` WHERE `network_bin` LIKE ? AND `mask` >= ?;";
+		$res = $sql->query($q, array(substr($row['network_bin'], 0, $row['mask'])."%", $row['mask']));
+	}
 }
-header("Location: ".$_GET['url']);
+header("Location: ".local_redirect_url($_POST['url'] ?? ''));
 exit();
 ?>

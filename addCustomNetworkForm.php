@@ -1,5 +1,5 @@
-<form action="./" method="get" class="network-form">
-	<input type="hidden" name="action" value="addNewNetwork">
+<form action="./?action=addNewNetwork" method="post" class="network-form">
+	<?php echo csrf_field(); ?>
 	<input type="hidden" name="format" value="hex">
 	
 	<div class="form-group">

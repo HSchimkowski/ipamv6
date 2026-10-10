@@ -1,10 +1,16 @@
 <?php
 
-$id = $_GET['id'];
+$id = valid_id($_GET['id'] ?? null);
 
-$q = "SELECT * FROM `ipamv6` WHERE `id`='".$id."' LIMIT 1;";
-$res = $sql->query($q);
+$q = "SELECT * FROM `ipamv6` WHERE `id`= ? LIMIT 1;";
+$res = $sql->query($q, array($id));
 $row = $sql->array_result($res);
+
+if (!$row)
+{
+	echo "Network not found!";
+	return;
+}
 
 // "Root" network
 $rootNetwork = new IPv6();
@@ -12,10 +18,10 @@ $rootNetwork->initBinary($row['network_bin'], $row['mask']);
 
 ?>
 
-<form action="./" method="get" class="network-form">
-	<input type="hidden" name="action" value="storeEditedNetwork">
+<form action="./?action=storeEditedNetwork" method="post" class="network-form">
+	<?php echo csrf_field(); ?>
 	<input type="hidden" name="format" value="hex">
-	<input type="hidden" name="id" value="<?php echo $_GET['id']?>">
+	<input type="hidden" name="id" value="<?php echo $id; ?>">
 	
 	<div class="form-group">
 		<label for="network">Network:</label>
@@ -25,13 +31,13 @@ $rootNetwork->initBinary($row['network_bin'], $row['mask']);
 
 	<div class="form-group">
 		<label for="mask">netmask:</label>
-		<input id="mask" type="text" name="newMask" value="<?php echo $row['mask']; ?>">
+		<input id="mask" type="text" name="newMask" value="<?php echo e($row['mask']); ?>">
 		<span class="hint"></span>
 	</div>
 
 	<div class="form-group">
 		<label for="description">description:</label>
-		<input id="description" type="text" name="newDescription" value="<?php echo $row['description']; ?>">
+		<input id="description" type="text" name="newDescription" value="<?php echo e($row['description']); ?>">
 		<span class="hint"></span>
 	</div>
 
@@ -40,7 +46,7 @@ $rootNetwork->initBinary($row['network_bin'], $row['mask']);
 		<div class="color-input">
 			<script type="text/javascript" src="jscolor/jscolor.js"></script>
 			<input id="color" type="text" class="color {hash:true,pickerPosition:'right',pickerClosable:true}" 
-				   name="newColor" value="<?php echo $row['color']; ?>">
+				   name="newColor" value="<?php echo e($row['color']); ?>">
 		</div>
 		<span class="hint"></span>
 	</div>

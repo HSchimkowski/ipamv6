@@ -5,11 +5,15 @@ require_once 'class/mysq.class.php';
 require_once 'class/ipv6.php';
 require_once 'functions.php';
 // load Session cookie
+start_session();
 
-error_reporting(E_ERROR | E_PARSE);
+// basic security headers
+header("X-Frame-Options: DENY");
+header("X-Content-Type-Options: nosniff");
+header("Referrer-Policy: same-origin");
 
 // start database connection
-$sql = new mysql("localhost","user","passwort","datenbank"); 
+$sql = new mysql();
 
 if (! isset($_GET['action']))
 	$_GET['action'] = "none";

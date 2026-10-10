@@ -1,7 +1,13 @@
 <?php 
 
-$gNetwork	= $_GET['network'];
-$gMask		= $_GET['mask'];
+$gNetwork	= valid_bin_network($_GET['network'] ?? null);
+$gMask		= valid_mask($_GET['mask'] ?? null, 120);
+
+if ($gNetwork === null || $gMask === null)
+{
+	echo "Invalid network or netmask!";
+	return;
+}
 
 $gIP = new IPv6();
 $gIP->initBinary($gNetwork, $gMask);
@@ -12,10 +18,10 @@ navBar();
 // subnets
 ?>
 <div id="subnetted">
-	<form action="./" method="get">
+	<form action="./?action=addNewNetwork" method="post">
 		<fieldset>
 			<legend>add new subnet</legend>
-			<input type="hidden" name="action" value="addNewNetwork">
+			<?php echo csrf_field(); ?>
 			<table>
 				<tr>
 					<td>subnet:</td>
@@ -66,9 +72,9 @@ navBar();
 $q = "	SELECT * 
 		FROM `".DB_PREFIX."ipamv6` 
 		WHERE  
-			(`network_bin` LIKE '".substr($_GET['network'], 0, $_GET['mask'])."%' AND `mask`> '".$gMask."' ) 
+			(`network_bin` LIKE ? AND `mask`> ? ) 
 		ORDER BY `network_bin`, `mask`;";
-$res = $sql->query($q);
+$res = $sql->query($q, array(substr($gNetwork, 0, $gMask)."%", $gMask));
 
 $hidden=0;
 $hiddenCounter=0;
@@ -112,13 +118,13 @@ They are not visible into your current view with a depth between /<?php echo $gM
 	{
 	?><li>
 		<a href="./?action=sudoku&amp;mask=<?php echo ($gMask + 8); ?>&amp;network=<?php echo $ip->binNetwork();?>">
-			<?php echo $ip->hexCompressedNetwork();?>/<?php echo $row['mask']?>
+			<?php echo $ip->hexCompressedNetwork();?>/<?php echo e($row['mask']); ?>
 		</a>
-		<span style="background: <?php echo $row['color']; ?>">
-			(<?php echo $row['description']?>)
+		<span style="background: <?php echo e_color($row['color']); ?>">
+			(<?php echo e($row['description']); ?>)
 		</span>
-		<a href="./?action=editNetworkForm&amp;id=<?php echo $row['id']; ?>">(edit)</a>
-		<a href="./?action=deleteNetwork&amp;id=<?php echo $row['id']; ?>">(delete)</a>
+		<a href="./?action=editNetworkForm&amp;id=<?php echo e($row['id']); ?>">(edit)</a>
+		<a href="./?action=deleteNetwork&amp;id=<?php echo e($row['id']); ?>">(delete)</a>
 		<?php 
 		$hidden=0;
 		$lastNetwork_bin = $row['network_bin'];

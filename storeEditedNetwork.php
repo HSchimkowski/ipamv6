@@ -1,30 +1,37 @@
 <?php
 
-$id 			= $_GET['id'];
-$newNetwork 	= $_GET['newNetwork'];
-$newMask		= $_GET['newMask'];
-$newDescription	= $_GET['newDescription'];
-$newColor		= $_GET['newColor'];
-$newRoot		= isset($_GET['root']) ? $_GET['root'] : 0;
+require_post_with_csrf();
 
-$insIp = new IPv6();
-if($_GET['format']=="hex")
-	$insIp->initHex($newNetwork, $newMask);
-else
-	$insIp->initBinary($newNetwork, $newMask);
+$id 			= valid_id($_POST['id'] ?? null);
+$newDescription	= (string)($_POST['newDescription'] ?? '');
+$newColor		= valid_color($_POST['newColor'] ?? null);
+$newRoot		= (($_POST['newRoot'] ?? '') == '1') ? 1 : 0;
+
+$insIp = network_from_request($_POST['newNetwork'] ?? null, $_POST['newMask'] ?? null, $_POST['format'] ?? '');
+if ($id === null || $insIp === null)
+	bad_request("Invalid network or netmask!");
+$newMask = $insIp->myPrefix;
 
 
 $q= "UPDATE `ipamv6` SET 
-		`network` = '".$insIp->getMyExpandedAddress()."',
-		`network_bin` = '".$insIp->binNetwork()."',
-		`mask` = '".$newMask."',
-		`color` = '".$newColor."',
-		`root` = '".$newRoot."', 
-		`description` = '".$newDescription."' 
+		`network` = ?,
+		`network_bin` = ?,
+		`mask` = ?,
+		`color` = ?,
+		`root` = ?, 
+		`description` = ? 
 	WHERE 
-		`id` = ".$id.";";
+		`id` = ?;";
 
-$res = $sql->query($q);
+$res = $sql->query($q, array(
+	$insIp->getMyExpandedAddress(),
+	$insIp->binNetwork(),
+	$newMask,
+	$newColor,
+	$newRoot,
+	$newDescription,
+	$id,
+));
 
 #header("Location: ./?action=showIpv6Route");
 

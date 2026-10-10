@@ -1,29 +1,35 @@
 <?php
 
-$id	= $_GET['id'];
+$id	= valid_id($_GET['id'] ?? null);
 
 $hasSubnet = false;
 
-$q = "SELECT * FROM `ipamv6` WHERE `id`= '".$id."';";
-$res = $sql->query($q);
+$q = "SELECT * FROM `ipamv6` WHERE `id`= ?;";
+$res = $sql->query($q, array($id));
 $row = $sql->array_result($res);
+
+if (!$row)
+{
+	echo "Network not found!";
+	return;
+}
 
 $ip = new IPv6();
 $ip->initBinary($row['network_bin'], $row['mask']);
 
 
 // check if there are subnets
-$q="SELECT * FROM `ipamv6` WHERE `network_bin` LIKE '".substr($row['network_bin'], 0, $row['mask'])."%' AND `mask` > '".$row['mask']."' LIMIT 1;";
-$res = $sql->query($q);
-$row = $sql->array_result($res);
-if($row['id']!="")
+$q="SELECT * FROM `ipamv6` WHERE `network_bin` LIKE ? AND `mask` > ? LIMIT 1;";
+$res = $sql->query($q, array(substr($row['network_bin'], 0, $row['mask'])."%", $row['mask']));
+if($sql->array_result($res))
 	$hasSubnet=true;
 
 ?>
 
-<form action="./deleteNetworks.php" method="get" class="delete-network-form">
+<form action="./deleteNetworks.php" method="post" class="delete-network-form">
+    <?php echo csrf_field(); ?>
     <input type="hidden" name="id" value="<?php echo $id; ?>">
-    <input type="hidden" name="url" value="<?php echo $_SERVER["HTTP_REFERER"]; ?>">
+    <input type="hidden" name="url" value="<?php echo e(local_redirect_url($_SERVER["HTTP_REFERER"] ?? '')); ?>">
     
     <div class="confirmation-message">
         Do you really want to delete <?php echo $ip->getMyCompressedAddress(); ?>/<?php echo $ip->myPrefix; ?>?
