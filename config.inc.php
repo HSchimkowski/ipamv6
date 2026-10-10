@@ -23,3 +23,7 @@ ipamv6_config("DB_PORT", '3306');		# Database port (default: 3306)
 # desc shows the most specific network for a given field
 # asc  shows the "biggest" network in that area
 ipamv6_config("NET_ORDER", "asc");		# order of the database (default: asc)
+
+# NET_ORDER is used directly in SQL, so only "asc" and "desc" are allowed
+if (!in_array(strtolower(NET_ORDER), array('asc', 'desc'), true))
+	exit('config: NET_ORDER must be "asc" or "desc"');

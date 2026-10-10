@@ -1,10 +1,16 @@
 <?php
 
-$id = $_GET['id'];
+$id = valid_id($_GET['id'] ?? null);
 
-$q = "SELECT * FROM `ipamv6` WHERE `id`='".$id."' LIMIT 1;";
-$res = $sql->query($q);
+$q = "SELECT * FROM `ipamv6` WHERE `id`= ? LIMIT 1;";
+$res = $sql->query($q, array($id));
 $row = $sql->array_result($res);
+
+if (!$row)
+{
+	echo "Network not found!";
+	return;
+}
 
 // "Root" network
 $rootNetwork = new IPv6();
@@ -15,7 +21,7 @@ $rootNetwork->initBinary($row['network_bin'], $row['mask']);
 <form action="./" method="get" class="network-form">
 	<input type="hidden" name="action" value="storeEditedNetwork">
 	<input type="hidden" name="format" value="hex">
-	<input type="hidden" name="id" value="<?php echo $_GET['id']?>">
+	<input type="hidden" name="id" value="<?php echo $id; ?>">
 	
 	<div class="form-group">
 		<label for="network">Network:</label>

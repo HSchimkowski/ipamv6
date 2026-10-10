@@ -1,7 +1,13 @@
 <?php 
 
-$gNetwork	= $_GET['network'];
-$gMask		= $_GET['mask'];
+$gNetwork	= valid_bin_network($_GET['network'] ?? null);
+$gMask		= valid_mask($_GET['mask'] ?? null, 120);
+
+if ($gNetwork === null || $gMask === null)
+{
+	echo "Invalid network or netmask!";
+	return;
+}
 
 $gIP = new IPv6();
 $gIP->initBinary($gNetwork, $gMask);
@@ -66,9 +72,9 @@ navBar();
 $q = "	SELECT * 
 		FROM `".DB_PREFIX."ipamv6` 
 		WHERE  
-			(`network_bin` LIKE '".substr($_GET['network'], 0, $_GET['mask'])."%' AND `mask`> '".$gMask."' ) 
+			(`network_bin` LIKE ? AND `mask`> ? ) 
 		ORDER BY `network_bin`, `mask`;";
-$res = $sql->query($q);
+$res = $sql->query($q, array(substr($gNetwork, 0, $gMask)."%", $gMask));
 
 $hidden=0;
 $hiddenCounter=0;

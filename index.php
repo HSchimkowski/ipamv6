@@ -6,8 +6,6 @@ require_once 'class/ipv6.php';
 require_once 'functions.php';
 // load Session cookie
 
-error_reporting(E_ERROR | E_PARSE);
-
 // start database connection
 $sql = new mysql();
 

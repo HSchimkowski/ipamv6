@@ -272,6 +272,22 @@ check('Netz bearbeiten', function (&$e) {
 	expectTrue($e, rowCount() === 5, 'Anzahl der Netze hat sich veraendert');
 });
 
+check('Netz bearbeiten: root-Flag bleibt erhalten', function (&$e) {
+	request('GET', '/', array(
+		'action' => 'storeEditedNetwork', 'format' => 'hex', 'id' => 819, 'newNetwork' => '2001:db8::',
+		'newMask' => 32, 'newDescription' => 'SH', 'newColor' => '#FFFFAA', 'newRoot' => 1,
+	));
+	expectTrue($e, rowCount('`id`=819 AND `root`=1') === 1, 'root-Flag wurde zurueckgesetzt');
+});
+
+check('Ungueltige Farbe wird nicht gespeichert', function (&$e) {
+	request('GET', '/', array(
+		'action' => 'addNewNetwork', 'format' => 'hex', 'newNetwork' => '2001:db8:1234::',
+		'newMask' => 48, 'newDescription' => 'farbe', 'newColour' => 'red;x:y',
+	));
+	expectTrue($e, rowCount("`description`='farbe' AND `color`='#FFFFAA'") === 1, 'ungueltige Farbe wurde uebernommen');
+});
+
 check('Netz loeschen (ohne Subnetze)', function (&$e) {
 	$r = request('GET', '/deleteNetworks.php', array('id' => 826, 'subnets' => 0, 'url' => './?action=showIpv6Route'));
 	expectTrue($e, $r[0] === 302, "HTTP-Status {$r[0]} statt 302");

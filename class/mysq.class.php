@@ -1,223 +1,114 @@
-<?php 
+<?php
 
-/* Source: http://www.php-einfach.de/codeschnipsel_6619.php /*
+/*
+    Thin wrapper around mysqli.
 
-error_reporting(E_ALL); 
+    Originally based on the "PHP5 Mysql-klasse" by Web Communication World
+    (www.wccw.in, http://www.php-einfach.de/codeschnipsel_6619.php), which may be
+    used, modified and redistributed freely with this notice.
 
-/* 
-    @ PHP5 Mysql-klasse  
-    @ Copyright by Web Communication World (www.wccw.in) 
-    @ Diese Klasse darf frei unter diesem Vermerk eingesetzt, verändert und weitergegeben werden 
-    @ Weitere Klassen, sind auf www.wccw.in Kostenlos erhältlich 
+    Values must never be concatenated into SQL. Pass them as parameters instead:
+        $sql->query("SELECT * FROM `ipamv6` WHERE `id` = ?", array($id));
+*/
 
-*/ 
+class mysql
+{
+    private $last_result = null;
+    private $conn_id = null;
 
+    public function __construct()
+    {
+        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+        try
+        {
+            $this->conn_id = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, (int)DB_PORT);
+            $this->conn_id->set_charset('utf8mb4');
+        }
+        catch (mysqli_sql_exception $e)
+        {
+            error_log('IPAMv6: database connection failed: ' . $e->getMessage());
+            http_response_code(500);
+            exit('Database connection failed.');
+        }
+    }
 
+    /**
+     * Runs a query. With $params the query is executed as prepared statement,
+     * every "?" placeholder is bound to the next value of $params.
+     *
+     * Returns a mysqli_result for queries with a result set, true for other
+     * successful queries and false on error (the error is written to the log).
+     */
+    public function query($sqlcode, array $params = array())
+    {
+        try
+        {
+            if (!$params)
+            {
+                $this->last_result = $this->conn_id->query($sqlcode);
+            }
+            else
+            {
+                $stmt = $this->conn_id->prepare($sqlcode);
+                $stmt->execute(array_values($params));
+                $result = $stmt->get_result();
+                $this->last_result = ($result === false) ? true : $result;
+                $stmt->close();
+            }
+        }
+        catch (mysqli_sql_exception $e)
+        {
+            error_log('IPAMv6: query failed: ' . $e->getMessage() . ' -- SQL: ' . $sqlcode);
+            $this->last_result = false;
+        }
 
+        return $this->last_result;
+    }
 
+    private function result_set($res)
+    {
+        if ($res === null)
+            $res = $this->last_result;
+        return ($res instanceof mysqli_result) ? $res : null;
+    }
 
+    public function array_result($res = null)
+    {
+        $res = $this->result_set($res);
+        return $res ? $res->fetch_array() : null;
+    }
 
+    public function assoc_result($res = null)
+    {
+        $res = $this->result_set($res);
+        return $res ? $res->fetch_assoc() : null;
+    }
 
+    public function num_result($res = null)
+    {
+        $res = $this->result_set($res);
+        return $res ? $res->num_rows : 0;
+    }
 
-class mysql 
-{ 
-    private $host     = '';  
-    private $port = '';
-    private $user     = ''; 
-    private $passwort     = '';  
-    private $dbname     = ''; 
-    private $last_injection = ''; 
-    private $conn_id = null; 
-     
-     
-     
-     
-    public function __construct() 
-    { 
-        $this->host     = DB_HOST; 
-	$this->port	= DB_PORT;
-        $this->user     = DB_USER; 
-        $this->passwort = DB_PASS; 
-        $this->dbname     = DB_NAME; 
-        $this->connect_mysql(); 
-        return($this->conn_id); 
-    } 
-     
-     
-     
-    private function connect_mysql() 
-    { 
-        $this->conn_id = new mysqli($this->host,$this->user,$this->passwort, $this->dbname, $this->port); 
-         
-        if($this->conn_id->connect_errno) 
-        { 
-            $message  = "Verbindung zur Datenbank nicht m&ouml;glich.<br />\n"; 
-            $message .= "Mysql-fehlermeldung: <br />\n"; 
-            $message .= $this->conn_id->connect_error; 
-             
-            trigger_error($message); 
-        }  
-    } 
-     
-     
-     
-    public function query($sqlcode) 
-    { 
-        $this->last_injection = $this->conn_id->query($sqlcode); 
-         
-            if($this->last_injection === false) 
-            { 
-                $message  = "Fehler bei dem Ausf&uuml;hren eines Mysql-codes!<br />\n"; 
-                $message .= "Mysql-Code: " . htmlspecialchars($sqlcode, ENT_QUOTES) . "<br />\n"; 
-                $message .= "Mysql-fehlermeldung:<br />\n"; 
-                $message .= mysqli_error(); 
-                trigger_error($message); 
-            } 
-             
-        return($this->last_injection); 
-    } 
-     
-     
-     
-    public function array_result($sql = NULL, &$row = '') 
-    { 
-        $inc = ''; 
-        if($sql === NULL) 
-        { 
-            $inc = $this->last_injection; 
-            } else { 
-            $inc = $sql; 
-        } 
-         
-        $row = mysqli_fetch_array($inc); 
-         
-        return($row); 
-    } 
-     
-     
-     
-    public function row_result($sql = NULL, &$row = '') 
-    { 
-        $inc = ''; 
-        if($sql === NULL) 
-        { 
-            $inc = $this->last_injection; 
-            } else { 
-            $inc = $sql; 
-        } 
-         
-        $row = mysqli_fetch_row($inc); 
-         
-        return($row); 
-    } 
-     
-     
-     
-    public function object_result($sql = NULL, &$row = '') 
-    { 
-        $inc = ''; 
-        if($sql === NULL) 
-        { 
-            $inc = $this->last_injection; 
-            } else { 
-            $inc = $sql; 
-        } 
-         
-        $row = mysqli_fetch_object($inc); 
-         
-        return($row); 
-    } 
-     
-     
-     
-    public function assoc_result($sql = NULL, &$row = '') 
-    { 
-        $inc = ''; 
-        if($sql === NULL) 
-        { 
-            $inc = $this->last_injection; 
-            } else { 
-            $inc = $sql; 
-        } 
-         
-        $row = mysqli_fetch_assoc($inc); 
-         
-        return($row); 
-    } 
-     
-     
-     
-    public function num_result($sql = NULL) 
-    { 
-        $inc = ''; 
-        if($sql === NULL) 
-        { 
-            $inc = $this->last_injection; 
-            } else { 
-            $inc = $sql; 
-        } 
-         
-        $num = mysqli_num_rows($inc); 
-         
-        return($num); 
-    } 
-     
-     
-     
-    public function sql_string($string) 
-    { 
-        return(mysqli_real_escape_string($string)); 
-    } 
-     
-     
-     
-    public function free_result($sql = NULL) 
-    { 
-        $inc = ''; 
-        if($sql === NULL) 
-        { 
-            $inc = $this->last_injection; 
-            } else { 
-            $inc = $sql; 
-        } 
-         
-        mysqli_free_result($inc); 
-    } 
-     
-     
-     
-    public function result($set = 0, $field = 0, $sql = NULL, &$row = '') 
-    { 
-        $inc = ''; 
-        if($sql === NULL) 
-        { 
-            $inc = $this->last_injection; 
-            } else { 
-            $inc = $sql; 
-        } 
-         
-        $row = mysqli_result($result, $set, $field); 
-         
-        return($row); 
-    } 
-     
-     
-     
-    public function insert_id(&$row = '') 
-    { 
-     
-        $row = mysqli_insert_id(); 
-         
-        return($row); 
-    } 
-     
-     
-     
-    public function close_connect() 
-    { 
-        mysqli_close($this->conn_id); 
-    } 
-} 
+    public function free_result($res = null)
+    {
+        $res = $this->result_set($res);
+        if ($res)
+            $res->free();
+    }
 
+    public function insert_id()
+    {
+        return $this->conn_id->insert_id;
+    }
 
-?>
+    public function affected_rows()
+    {
+        return $this->conn_id->affected_rows;
+    }
+
+    public function close_connect()
+    {
+        $this->conn_id->close();
+    }
+}

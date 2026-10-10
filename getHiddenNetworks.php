@@ -2,12 +2,12 @@
 require_once 'config.inc.php';
 require_once 'class/mysq.class.php';
 require_once 'class/ipv6.php';
+require_once 'functions.php';
 
-$_SERVER['REQUEST_URI'];
-
-$lastNetwork_bin = $_GET['lastNetwork_bin'];
-$mask = $_GET['mask'];
-$root = $_isset($_GET['root']) ? $_GET['root'] : 0;
+$lastNetwork_bin = valid_bin_network($_GET['lastNetwork_bin'] ?? null, false);
+$mask = valid_mask($_GET['mask'] ?? null, 120);
+if ($lastNetwork_bin === null || $mask === null)
+	bad_request("Invalid network or netmask!");
 
 // start database connection
 $sql = new mysql();
@@ -18,10 +18,10 @@ header("Pragma: no-cache");
 $q="SELECT * 
 	FROM `".DB_PREFIX."ipamv6` 
 	WHERE (
-		`mask` > ".($mask) ."
+		`mask` > ?
 	)
 	ORDER BY network_bin ASC;";
-$res = $sql->query($q);
+$res = $sql->query($q, array($mask));
 $show=0;
 $i=0;
 while ($row = $sql->array_result($res))

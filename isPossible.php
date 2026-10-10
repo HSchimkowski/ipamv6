@@ -1,35 +1,33 @@
 <?php
+// load configfile
+require_once 'config.inc.php';
+require_once 'class/mysq.class.php';
+require_once 'class/ipv6.php';
+require_once 'functions.php';
 
-// Nur einfache Fehler melden
-error_reporting(E_ERROR | E_PARSE);
+$network = valid_hex_network($_REQUEST['network'] ?? null);
+$mask    = valid_mask($_REQUEST['mask'] ?? null);
 
 # Network is not valid!
-if( inet_pton($_REQUEST['network']) == false)
+if($network === null)
 {
 	echo "Network is not valid!";
 }
-elseif($_REQUEST['mask']<0 || $_REQUEST['mask']>128)
+elseif($mask === null)
 {
 	echo "netmask is not valid!";
 }
 else
 {
-	// load configfile
-	require_once 'config.inc.php';
-	require_once 'class/mysq.class.php';
-	require_once 'class/ipv6.php';
-	require_once 'functions.php';
-	// load Session cookie
-	
 	// start database connection
 	$sql = new mysql();
 
 	$ip = new IPv6();
-	$ip->initHex($_REQUEST['network'], $_REQUEST['mask']);
+	$ip->initHex($network, $mask);
 	
-	$q= "SELECT * FROM `ipamv6` WHERE `network_bin` = '".$ip->binNetwork()."' AND `mask` = '".$ip->myPrefix."' LIMIT 1";
-	$res = $sql->query($q);
-	if($sql->num_result(NULL) > 0)
+	$q= "SELECT * FROM `ipamv6` WHERE `network_bin` = ? AND `mask` = ? LIMIT 1";
+	$res = $sql->query($q, array($ip->binNetwork(), $ip->myPrefix));
+	if($sql->num_result($res) > 0)
 	{
 		echo "Network already exists!<br />";
 		$row = $sql->array_result($res);

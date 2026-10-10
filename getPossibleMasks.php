@@ -9,8 +9,10 @@ require_once 'functions.php';
 $sql = new mysql();
 
 
-$new_mask = $_GET['mask'];
-$new_root = $_GET['subnet'];
+$new_mask = valid_mask($_GET['mask'] ?? null, 120);
+$new_root = valid_bin_network($_GET['subnet'] ?? null);
+if ($new_mask === null || $new_root === null)
+	bad_request("Invalid network or netmask!");
 
 // "Root" network
 $rootNetwork = new IPv6();
@@ -52,31 +54,31 @@ $i=0;
 	#	$m[] =($new_mask + 0);
 
 if($n[1]=="0" && $n[2]=="0" && $n[3]=="0" && $n[4]=="0" && $n[5]=="0" && $n[6]=="0" && $n[7]=="0")
-	if(!existNetwork($new_root, $new_mask + 1))
+	if(!existNetwork($new_root, $new_mask + 1, $new_mask + 8))
 		$i++;
 
 if($n[2]=="0" && $n[3]=="0" && $n[4]=="0" && $n[5]=="0" && $n[6]=="0" && $n[7]=="0")
-	if(!existNetwork($new_root, $new_mask + 2))
+	if(!existNetwork($new_root, $new_mask + 2, $new_mask + 8))
 		$i++;
 
 if($n[3]=="0" && $n[4]=="0" && $n[5]=="0" && $n[6]=="0" && $n[7]=="0")
-	if(!existNetwork($new_root, $new_mask + 3))
+	if(!existNetwork($new_root, $new_mask + 3, $new_mask + 8))
 		$i++;
 
 if($n[4]=="0" && $n[5]=="0" && $n[6]=="0" && $n[7]=="0")
-	if(!existNetwork($new_root, $new_mask + 4))
+	if(!existNetwork($new_root, $new_mask + 4, $new_mask + 8))
 		$i++;
 
 if($n[5]=="0" && $n[6]=="0" && $n[7]=="0")
-	if(!existNetwork($new_root, $new_mask + 5))
+	if(!existNetwork($new_root, $new_mask + 5, $new_mask + 8))
 		$i++;
 
 if($n[6]=="0" && $n[7]=="0")
-	if(!existNetwork($new_root, $new_mask + 6))
+	if(!existNetwork($new_root, $new_mask + 6, $new_mask + 8))
 		$i++;
 
 if($n[7]=="0")
-	if(!existNetwork($new_root, $new_mask + 7))
+	if(!existNetwork($new_root, $new_mask + 7, $new_mask + 8))
 		$i++;
 
 echo $i;
