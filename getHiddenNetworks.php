@@ -46,10 +46,10 @@ while ($row = $sql->array_result($res))
 		?>
 		<li>
 			<a href="./?action=sudoku&mask=<?php echo $n; ?>&network=<?php echo substr($row['network_bin'], 0, $n).str_repeat("0", 128 - $n);?>">
-				<?php echo $ip->getMyCompressedAddress(); ?>/<?php echo $ip->myPrefix; ?> (<?php echo ($row['description']); ?>)
+				<?php echo $ip->getMyCompressedAddress(); ?>/<?php echo $ip->myPrefix; ?> (<?php echo e($row['description']); ?>)
 			</a>
-			<a href="./?action=editNetworkForm&id=<?php echo $row['id']?>">(edit)</a>
-			<a href="./?action=deleteNetwork&id=<?php echo $row['id']; ?>">(delete)</a>
+			<a href="./?action=editNetworkForm&id=<?php echo e($row['id']); ?>">(edit)</a>
+			<a href="./?action=deleteNetwork&id=<?php echo e($row['id']); ?>">(delete)</a>
 		</li>
 	<?php }
 	

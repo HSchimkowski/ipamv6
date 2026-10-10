@@ -100,8 +100,88 @@ function bad_request($message)
 }
 
 // ---------------------------------------------------------------------------
+// CSRF protection
+// ---------------------------------------------------------------------------
+
+/**
+ * Starts the session that holds the CSRF token.
+ */
+function start_session()
+{
+	if (session_status() == PHP_SESSION_ACTIVE)
+		return;
+	session_set_cookie_params(array(
+		'httponly' => true,
+		'samesite' => 'Lax',
+		'secure'   => !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off',
+	));
+	session_start();
+}
+
+function csrf_token()
+{
+	start_session();
+	if (empty($_SESSION['csrf_token']))
+		$_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+	return $_SESSION['csrf_token'];
+}
+
+/**
+ * Hidden form field with the CSRF token. Every form that changes data must contain it.
+ */
+function csrf_field()
+{
+	return '<input type="hidden" name="csrf_token" value="'.e(csrf_token()).'">';
+}
+
+/**
+ * Stops the request unless it is a POST request with a valid CSRF token.
+ */
+function require_post_with_csrf()
+{
+	if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST')
+	{
+		header('Allow: POST');
+		http_response_code(405);
+		exit('Method not allowed.');
+	}
+	$token = $_POST['csrf_token'] ?? '';
+	if (!is_string($token) || !hash_equals(csrf_token(), $token))
+	{
+		http_response_code(403);
+		exit('Invalid or expired form. Please reload the page and try again.');
+	}
+}
+
+/**
+ * Returns a redirect target inside this application. Only the query string of
+ * $url is kept, so the redirect can never lead to another site.
+ */
+function local_redirect_url($url)
+{
+	$query = is_string($url) ? (string)parse_url($url, PHP_URL_QUERY) : '';
+	return ($query === '') ? './' : './?'.$query;
+}
+
+// ---------------------------------------------------------------------------
 // output
 // ---------------------------------------------------------------------------
+
+/**
+ * Escapes a value for HTML output (text and attribute values).
+ */
+function e($value)
+{
+	return htmlspecialchars((string)$value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+}
+
+/**
+ * Returns the color for a style attribute, or an empty string if it is no #RRGGBB value.
+ */
+function e_color($value)
+{
+	return e(valid_color($value, ''));
+}
 
 function sudoku_cell($field, $row)
 {
@@ -113,10 +193,10 @@ function sudoku_cell($field, $row)
 <td 
 	id="cell<?php echo $field; ?>" 
 	class="field_<?php echo $field; ?>" 
-	style="background-color: <?php if($row['color']=="" || $row['mask'] > $gMask+8){echo "white";}else{echo $row['color']; }?>" 
+	style="background-color: <?php if(e_color($row['color'])=="" || $row['mask'] > $gMask+8){echo "white";}else{echo e_color($row['color']); }?>" 
 	<?php if($row['id']=='' || $row['mask'] > $gMask+8){?>	onclick="selectCell('<?php echo $field; ?>')" onMouseOver="highlightCell('<?php echo $field; ?>')"<?php }?>>
 	<?php if($row['id']!="" && $gMask < 120 && $row['mask'] < $gMask+9){?>
-		<a href="./?action=sudoku&amp;mask=<?php echo ($MyIPv6->myPrefix + 8); ?>&amp;network=<?php	echo substr_replace($MyIPv6->binNetwork(), myHex2Bin($field), $MyIPv6->myPrefix, 8);?>"	title="<?php echo $row['description']; ?>">
+		<a href="./?action=sudoku&amp;mask=<?php echo ($MyIPv6->myPrefix + 8); ?>&amp;network=<?php	echo substr_replace($MyIPv6->binNetwork(), myHex2Bin($field), $MyIPv6->myPrefix, 8);?>"	title="<?php echo e($row['description']); ?>">
 			<?php 
 	}
 	echo $field; 
@@ -150,8 +230,8 @@ function left()
 			$ipv6 = new IPv6();
 			$ipv6->initHex($row['network'], $row['mask']);
 			?><li>
-				<a 	href="./?action=sudoku&amp;mask=<?php echo min(120, floor($ipv6->myPrefix/8)*8); ?>&amp;network=<?php echo $ipv6->binNetwork() ?>" title="<?php echo $row['description']; ?>">
-					<?php echo $ipv6->hexCompressedNetwork()."/".$row['mask']; ?>
+				<a 	href="./?action=sudoku&amp;mask=<?php echo min(120, floor($ipv6->myPrefix/8)*8); ?>&amp;network=<?php echo $ipv6->binNetwork() ?>" title="<?php echo e($row['description']); ?>">
+					<?php echo $ipv6->hexCompressedNetwork()."/".e($row['mask']); ?>
 				</a>
 		<?php }
 		?>
@@ -265,8 +345,8 @@ function navBar()
 		
 	}
 	?></a>/<?php echo $cur->myPrefix; ?>
-	<span style="background: <?php echo $row['color'] ?? ''; ?>">
-		(<?php echo $row['description'] ?? ''; ?>)
+	<span style="background: <?php echo e_color($row['color'] ?? ''); ?>">
+		(<?php echo e($row['description'] ?? ''); ?>)
 	</span>
 	</div>
 	<?php 

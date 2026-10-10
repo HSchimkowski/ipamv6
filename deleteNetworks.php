@@ -7,11 +7,13 @@ require_once 'functions.php';
 // start database connection
 $sql = new mysql();
 
-$id = valid_id($_GET['id'] ?? null);
+require_post_with_csrf();
+
+$id = valid_id($_POST['id'] ?? null);
 if ($id === null)
 	bad_request("Invalid network!");
 
-if(($_GET['subnets'] ?? '') != "1")
+if(($_POST['subnets'] ?? '') != "1")
 {
 	$q = "DELETE FROM `ipamv6` WHERE `id`= ?;";
 	$res = $sql->query($q, array($id));
@@ -29,6 +31,6 @@ else
 		$res = $sql->query($q, array(substr($row['network_bin'], 0, $row['mask'])."%", $row['mask']));
 	}
 }
-header("Location: ".($_GET['url'] ?? './'));
+header("Location: ".local_redirect_url($_POST['url'] ?? ''));
 exit();
 ?>

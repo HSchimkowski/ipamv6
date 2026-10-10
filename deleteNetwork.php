@@ -26,9 +26,10 @@ if($sql->array_result($res))
 
 ?>
 
-<form action="./deleteNetworks.php" method="get" class="delete-network-form">
+<form action="./deleteNetworks.php" method="post" class="delete-network-form">
+    <?php echo csrf_field(); ?>
     <input type="hidden" name="id" value="<?php echo $id; ?>">
-    <input type="hidden" name="url" value="<?php echo $_SERVER["HTTP_REFERER"] ?? './'; ?>">
+    <input type="hidden" name="url" value="<?php echo e(local_redirect_url($_SERVER["HTTP_REFERER"] ?? '')); ?>">
     
     <div class="confirmation-message">
         Do you really want to delete <?php echo $ip->getMyCompressedAddress(); ?>/<?php echo $ip->myPrefix; ?>?

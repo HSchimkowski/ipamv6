@@ -1,10 +1,12 @@
 <?php
 
-$newDescription	= (string)($_GET['newDescription'] ?? '');
-$newColour		= valid_color($_GET['newColour'] ?? null);
-$newRoot		= (($_GET['root'] ?? '') == '1') ? 1 : 0;
+require_post_with_csrf();
 
-$insIp = network_from_request($_GET['newNetwork'] ?? null, $_GET['newMask'] ?? null, $_GET['format'] ?? '');
+$newDescription	= (string)($_POST['newDescription'] ?? '');
+$newColour		= valid_color($_POST['newColour'] ?? null);
+$newRoot		= (($_POST['root'] ?? '') == '1') ? 1 : 0;
+
+$insIp = network_from_request($_POST['newNetwork'] ?? null, $_POST['newMask'] ?? null, $_POST['format'] ?? '');
 if ($insIp === null)
 	bad_request("Invalid network or netmask!");
 $newMask = $insIp->myPrefix;

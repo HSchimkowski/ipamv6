@@ -32,7 +32,7 @@ else
 		echo "Network already exists!<br />";
 		$row = $sql->array_result($res);
 		$ip->initBinary($row['network_bin'], $row['mask']);
-		echo $ip->getMyCompressedAddress()."/".$ip->myPrefix." (".$row['description'].")";
+		echo $ip->getMyCompressedAddress()."/".$ip->myPrefix." (".e($row['description']).")";
 	}
 	else 
 	{

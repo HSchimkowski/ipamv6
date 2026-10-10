@@ -26,6 +26,7 @@ On the client-side you only need a modern webbrowser with activated Javascript a
 4. Make sure `display_errors` is disabled in the `php.ini` of your production server.
 
 IPAMv6 has no user management. Run it only in a protected network or behind an authentication of your webserver (e.g. HTTP Basic Auth).
+All forms that change data use POST with a CSRF token, so PHP sessions must work on your server.
 
 ## Tests
 The smoke tests start PHP's built-in webserver and run against a MySQL/MariaDB database (the database is reset with `ipamv6.sql` before each test):

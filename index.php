@@ -5,6 +5,12 @@ require_once 'class/mysq.class.php';
 require_once 'class/ipv6.php';
 require_once 'functions.php';
 // load Session cookie
+start_session();
+
+// basic security headers
+header("X-Frame-Options: DENY");
+header("X-Content-Type-Options: nosniff");
+header("Referrer-Policy: same-origin");
 
 // start database connection
 $sql = new mysql();

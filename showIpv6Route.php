@@ -18,9 +18,9 @@ while ($row = $sql->array_result($res))
 	$r->initBinary($row['network_bin'], $row['mask']);
 	echo str_repeat(" ", $r->myPrefix - $o);
 	echo "<a href=\".?action=sudoku&amp;mask=".min(120, floor($row['mask'] / 8)*8)."&amp;network=".$r->binNetwork()."\">";
-	echo $r->getMyCompressedAddress()."/".$r->myPrefix. " <span style=\"background: ".$row['color']."\">".$row['description']."</span></a> "; 
-	echo "<a href=\"./?action=editNetworkForm&amp;id=".$row['id']."\">(edit)</a> ";
-	echo "<a href=\"./?action=deleteNetwork&amp;id=".$row['id']."\">(delete)</a> \n";
+	echo $r->getMyCompressedAddress()."/".$r->myPrefix. " <span style=\"background: ".e_color($row['color'])."\">".e($row['description'])."</span></a> "; 
+	echo "<a href=\"./?action=editNetworkForm&amp;id=".e($row['id'])."\">(edit)</a> ";
+	echo "<a href=\"./?action=deleteNetwork&amp;id=".e($row['id'])."\">(delete)</a> \n";
 }
 
 ?>
