@@ -4,7 +4,7 @@ require_once 'config.inc.php';
 require_once 'class/mysq.class.php';
 
 // start database connection
-$sql = new mysql("localhost","user","passwort","datenbank"); 
+$sql = new mysql();
 
 if($_GET['subnets']!="1")
 {

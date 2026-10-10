@@ -9,7 +9,7 @@ require_once 'functions.php';
 error_reporting(E_ERROR | E_PARSE);
 
 // start database connection
-$sql = new mysql("localhost","user","passwort","datenbank"); 
+$sql = new mysql();
 
 if (! isset($_GET['action']))
 	$_GET['action'] = "none";

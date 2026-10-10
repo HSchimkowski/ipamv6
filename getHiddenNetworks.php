@@ -10,7 +10,7 @@ $mask = $_GET['mask'];
 $root = $_isset($_GET['root']) ? $_GET['root'] : 0;
 
 // start database connection
-$sql = new mysql("localhost","user","passwort","datenbank"); 
+$sql = new mysql();
 
 // dont allow cache
 header("Pragma: no-cache");

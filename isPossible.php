@@ -22,7 +22,7 @@ else
 	// load Session cookie
 	
 	// start database connection
-	$sql = new mysql("localhost","user","passwort","datenbank");
+	$sql = new mysql();
 
 	$ip = new IPv6();
 	$ip->initHex($_REQUEST['network'], $_REQUEST['mask']);

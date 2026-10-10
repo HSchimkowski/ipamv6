@@ -6,7 +6,7 @@ require_once 'class/ipv6.php';
 require_once 'functions.php';
 
 // start database connection
-$sql = new mysql("localhost","user","passwort","datenbank");
+$sql = new mysql();
 
 
 $new_mask = $_GET['mask'];
