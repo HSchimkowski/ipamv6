@@ -25,6 +25,12 @@ On the client-side you only need a modern webbrowser with activated Javascript a
    The defaults in `config.inc.php` are only meant for development.
 4. Make sure `display_errors` is disabled in the `php.ini` of your production server.
 
+### Upgrading an existing installation
+Databases created with an older `ipamv6.sql` lack the index on the networks. Add it once:
+```sql
+ALTER TABLE `ipamv6` ADD KEY `network_bin_mask` (`network_bin`,`mask`);
+```
+
 IPAMv6 has no user management. Run it only in a protected network or behind an authentication of your webserver (e.g. HTTP Basic Auth).
 All forms that change data use POST with a CSRF token, so PHP sessions must work on your server.
 

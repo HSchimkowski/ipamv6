@@ -7,8 +7,19 @@ send_security_headers();
 
 $lastNetwork_bin = valid_bin_network($_GET['lastNetwork_bin'] ?? null, false);
 $mask = valid_mask($_GET['mask'] ?? null, 120);
-if ($lastNetwork_bin === null || $mask === null)
+$root = valid_bin_network($_GET['root'] ?? null);
+if ($lastNetwork_bin === null || $mask === null || $root === null)
 	bad_request("Invalid network or netmask!");
+
+// only the subnets of the current view; "1...1" marks a group before the first visible subnet
+$where  = "`network_bin` LIKE ? AND `mask` > ?";
+$params = array(substr($root, 0, $mask)."%", $mask);
+if ($lastNetwork_bin != str_repeat("1", $mask + 8))
+{
+	// rows sorted before the last visible subnet are never shown
+	$where   .= " AND `network_bin` >= ?";
+	$params[] = str_pad($lastNetwork_bin, 128, "0");
+}
 
 // start database connection
 $sql = new mysql();
@@ -18,11 +29,9 @@ header("Pragma: no-cache");
 
 $q="SELECT * 
 	FROM `".DB_PREFIX."ipamv6` 
-	WHERE (
-		`mask` > ?
-	)
-	ORDER BY network_bin ASC;";
-$res = $sql->query($q, array($mask));
+	WHERE ".$where."
+	ORDER BY `network_bin`, `mask`, `id`;";
+$res = $sql->query($q, $params);
 $show=0;
 $i=0;
 while ($row = $sql->array_result($res))
