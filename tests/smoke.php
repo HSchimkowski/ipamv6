@@ -11,6 +11,13 @@
  *   PHP_ERROR_LOG  Logdatei des Webservers; jede neue Zeile darin laesst den Test scheitern
  */
 
+// Die Tests setzen die Datenbank zurueck. Ueber den Webserver aufgerufen
+// wuerde das die Daten loeschen, deshalb nur auf der Kommandozeile ausfuehren.
+if (PHP_SAPI !== 'cli') {
+	http_response_code(403);
+	exit('Forbidden');
+}
+
 error_reporting(E_ALL);
 
 $baseUrl  = rtrim(getenv('BASE_URL') ?: 'http://127.0.0.1:8000', '/');
@@ -497,6 +504,49 @@ check('Sicherheits-Header', function (&$e) {
 	$cookie = (string)header_value($headers, 'Set-Cookie');
 	expectTrue($e, stripos($cookie, 'HttpOnly') !== false && stripos($cookie, 'SameSite=Lax') !== false,
 		'Session-Cookie ohne HttpOnly/SameSite: ' . $cookie);
+});
+
+check('Sicherheits-Header an den AJAX-Endpunkten', function (&$e) {
+	$endpoints = array(
+		array('GET', '/isPossible.php', array('network' => '2001:db8::', 'mask' => 32)),
+		array('GET', '/getPossibleMasks.php', array('mask' => 32, 'subnet' => NET_2001_DB8_32)),
+		array('GET', '/getHiddenNetworks.php', array('mask' => 32, 'lastNetwork_bin' => NET_2001_DB8_32)),
+		array('GET', '/deleteNetworks.php', array()),
+	);
+	foreach ($endpoints as $ep) {
+		list(, , $headers) = request($ep[0], $ep[1], $ep[2]);
+		expectTrue($e, header_value($headers, 'X-Content-Type-Options') === 'nosniff', "nosniff fehlt: {$ep[1]}");
+		expectTrue($e, header_value($headers, 'X-Frame-Options') === 'DENY', "X-Frame-Options fehlt: {$ep[1]}");
+	}
+	list(, , $headers) = request('GET', '/getPossibleMasks.php', array('mask' => 32, 'subnet' => NET_2001_DB8_32));
+	expectTrue($e, stripos((string)header_value($headers, 'Content-Type'), 'text/plain') === 0,
+		'getPossibleMasks liefert kein text/plain');
+});
+
+check('Seitenteile sind nicht direkt aufrufbar', function (&$e) {
+	$parts = array('addNewNetwork.php', 'storeEditedNetwork.php', 'editNetworkForm.php', 'deleteNetwork.php',
+		'showIpv6Route.php', 'sudoku.php', 'addCustomNetworkForm.php');
+	foreach ($parts as $part) {
+		list($code, $body) = request('GET', '/' . $part);
+		expectTrue($e, $code === 403, "$part: HTTP-Status $code statt 403");
+		expectTrue($e, trim($body) === 'Forbidden', "$part: unerwartete Ausgabe");
+	}
+	$before = rowCount();
+	list($code) = request('POST', '/addNewNetwork.php',
+		array('newNetwork' => '2001:db8:ff00::', 'newMask' => 40, 'format' => 'hex'));
+	expectTrue($e, $code === 403 && rowCount() === $before, 'addNewNetwork.php direkt aufgerufen legt Netz an');
+});
+
+check('Smoke-Tests sind nicht per Webserver ausfuehrbar', function (&$e) {
+	$before = rowCount();
+	list($code) = request('GET', '/tests/smoke.php');
+	expectTrue($e, $code === 403, "HTTP-Status $code statt 403");
+	expectTrue($e, rowCount() === $before, 'Datenbank wurde veraendert');
+});
+
+check('TODO-Liste wird escaped statt eingebunden', function (&$e) {
+	$r = request('GET', '/', array('action' => 'todo'));
+	expectPage($e, $r, array('(done)', '&quot;'));
 });
 
 echo "\n$passed bestanden, $failures fehlgeschlagen\n";

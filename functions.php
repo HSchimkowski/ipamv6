@@ -168,6 +168,16 @@ function local_redirect_url($url)
 // ---------------------------------------------------------------------------
 
 /**
+ * Basic security headers. Every script that answers HTTP requests must send them.
+ */
+function send_security_headers()
+{
+	header("X-Frame-Options: DENY");
+	header("X-Content-Type-Options: nosniff");
+	header("Referrer-Policy: same-origin");
+}
+
+/**
  * Escapes a value for HTML output (text and attribute values).
  */
 function e($value)

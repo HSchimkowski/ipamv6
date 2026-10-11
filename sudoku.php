@@ -1,4 +1,6 @@
 <?php 
+// only reachable through index.php
+if (!defined('IPAMV6')) { http_response_code(403); exit('Forbidden'); }
 
 $gNetwork	= valid_bin_network($_GET['network'] ?? null);
 $gMask		= valid_mask($_GET['mask'] ?? null, 120);

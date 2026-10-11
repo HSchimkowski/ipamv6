@@ -1,4 +1,7 @@
 <?php
+// the included page parts refuse to run without this constant
+define('IPAMV6', true);
+
 // load configfile
 require_once 'config.inc.php';
 require_once 'class/mysq.class.php';
@@ -7,10 +10,7 @@ require_once 'functions.php';
 // load Session cookie
 start_session();
 
-// basic security headers
-header("X-Frame-Options: DENY");
-header("X-Content-Type-Options: nosniff");
-header("Referrer-Policy: same-origin");
+send_security_headers();
 
 // start database connection
 $sql = new mysql();
@@ -58,7 +58,7 @@ elseif ($_GET['action']=="storeEditedNetwork")
 					elseif ($_GET['action']=="todo")
 					{
 						echo "<pre>";
-						include_once 'todo.txt';
+						echo e(file_get_contents(__DIR__ . '/todo.txt'));
 						echo "</pre>";
 					}
 					elseif ($_GET['action']=="help")

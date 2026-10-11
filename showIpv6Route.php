@@ -1,3 +1,7 @@
+<?php
+// only reachable through index.php
+if (!defined('IPAMV6')) { http_response_code(403); exit('Forbidden'); }
+?>
 <pre>
 <?php
 

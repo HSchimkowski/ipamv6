@@ -1,3 +1,7 @@
+<?php
+// only reachable through index.php
+if (!defined('IPAMV6')) { http_response_code(403); exit('Forbidden'); }
+?>
 <form action="./?action=addNewNetwork" method="post" class="network-form">
 	<?php echo csrf_field(); ?>
 	<input type="hidden" name="format" value="hex">
