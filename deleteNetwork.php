@@ -1,4 +1,6 @@
 <?php
+// only reachable through index.php
+if (!defined('IPAMV6')) { http_response_code(403); exit('Forbidden'); }
 
 $id	= valid_id($_GET['id'] ?? null);
 

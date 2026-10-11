@@ -4,6 +4,7 @@ require_once 'config.inc.php';
 require_once 'class/mysq.class.php';
 require_once 'class/ipv6.php';
 require_once 'functions.php';
+send_security_headers();
 
 $network = valid_hex_network($_REQUEST['network'] ?? null);
 $mask    = valid_mask($_REQUEST['mask'] ?? null);

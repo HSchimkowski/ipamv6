@@ -3,6 +3,7 @@
 require_once 'config.inc.php';
 require_once 'class/mysq.class.php';
 require_once 'functions.php';
+send_security_headers();
 
 // start database connection
 $sql = new mysql();

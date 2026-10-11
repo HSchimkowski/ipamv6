@@ -3,6 +3,7 @@ require_once 'config.inc.php';
 require_once 'class/mysq.class.php';
 require_once 'class/ipv6.php';
 require_once 'functions.php';
+send_security_headers();
 
 $lastNetwork_bin = valid_bin_network($_GET['lastNetwork_bin'] ?? null, false);
 $mask = valid_mask($_GET['mask'] ?? null, 120);
