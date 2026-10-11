@@ -193,6 +193,40 @@ function e_color($value)
 	return e(valid_color($value, ''));
 }
 
+/**
+ * Assigns the subnets of the view $gMask to the 256 cells of the sudoku.
+ *
+ * $subnets are the rows below the current view (mask > $gMask). A subnet with
+ * mask $gMask+k covers the cells whose first k bits equal its own, a subnet with
+ * mask >= $gMask+8 only its own cell. If several subnets cover a cell, the
+ * biggest one wins (NET_ORDER "asc") or the smallest one (NET_ORDER "desc").
+ * With equal masks the first row wins, so $subnets should have a stable order.
+ *
+ * Returns an array cell value (0-255) => row; cells without subnet are missing.
+ */
+function sudoku_cells(array $subnets, $gMask)
+{
+	$asc = strtolower(NET_ORDER) == 'asc';
+	$cells = array();
+	foreach ($subnets as $row)
+	{
+		$k = min(8, $row['mask'] - $gMask);
+		$bits = bindec(str_pad(substr($row['network_bin'], $gMask, 8), 8, '0'));
+		$size = 1 << (8 - $k);
+		// the bits behind the netmask must be zero, otherwise no cell matches
+		if ($bits % $size != 0)
+			continue;
+		for ($cell = $bits; $cell < $bits + $size; $cell++)
+		{
+			if (!isset($cells[$cell])
+				|| ($asc  && $row['mask'] < $cells[$cell]['mask'])
+				|| (!$asc && $row['mask'] > $cells[$cell]['mask']))
+				$cells[$cell] = $row;
+		}
+	}
+	return $cells;
+}
+
 function sudoku_cell($field, $row)
 {
 	global $MyIPv6;
@@ -268,38 +302,26 @@ function existNetwork($net, $mask, $maxMask)
 
 function navBar()
 {
-	global $sql, $gNetwork, $gMask, $gIP;
-	$r = "";
+	global $sql, $gNetwork, $gMask;
 	
 	$root = new IPv6();
-	$par  = new IPv6();
 	$cur  = new IPv6();
 	
-	// find my Root Network
-	for($i=$gMask; $i>=0; $i--)
+	// all networks that contain the current view, from the biggest to the smallest
+	$q = "SELECT * FROM `ipamv6` WHERE `mask` <= ? AND LEFT(`network_bin`, `mask`) = LEFT(?, `mask`) ORDER BY `mask`, `id`;";
+	$res = $sql->query($q, array($gMask, $gNetwork));
+	$first = $row = null;
+	while ($next = $sql->array_result($res))
 	{
-		$q = "SELECT * FROM `ipamv6` WHERE `network_bin` LIKE ? ORDER BY mask; ";
-		$res = $sql->query($q, array(substr($gNetwork, 0, $i)."%"));
-		if($row = $sql->array_result($res))
-		{
-			$root->initBinary($row['network_bin'], $row['mask']);
-			$root->myDescription=$row['description'];
-			//break;
-		}
+		$first = $first ?? $next;
+		$row = $next;
 	}
 	
-	// get Parent Network
-	for($i=$gMask; $i>$root->myPrefix; $i--)
-	{
-		$q = "SELECT * FROM `ipamv6` WHERE `network_bin` LIKE ? AND `mask` <= ? ORDER BY mask DESC; ";
-		$res = $sql->query($q, array(substr($gNetwork, 0, $i)."%", $gMask));
-		if($row = $sql->array_result($res))
-		{
-			$par->initBinary($row['network_bin'], $row['mask']);
-			break;
-		}
-			
-	}
+	// the root network is the biggest one, the label shows the smallest one
+	if ($first)
+		$root->initBinary($first['network_bin'], $first['mask']);
+	else
+		$root->initBinary(str_repeat("0", 128), 0);
 	
 	// get current Network
 	$cur->initBinary($gNetwork, $gMask);
@@ -307,9 +329,6 @@ function navBar()
 	// plain Hex
 	$ip=str_split(str_replace(":", "", $cur->getMyExpandedAddress()),2);
 	
-	#echo "root: ".$root->getMyExpandedAddress()."/".$root->myPrefix."<br />";
-	#echo "par: ".$par->getMyExpandedAddress()."/".$par->myPrefix."<br />";
-	#echo "cur: ".$cur->getMyExpandedAddress()."/".$cur->myPrefix."<br />";
 	
 	
 	?>

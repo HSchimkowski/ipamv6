@@ -47,6 +47,65 @@ function resetDb()
 	}
 }
 
+/**
+ * Adds the example networks to the sample data of ipamv6.sql:
+ * a second root network, subnets that are only reachable by "...",
+ * a subnet behind a visible network and a very deep one.
+ */
+function addExampleNetworks()
+{
+	global $db;
+	$networks = array(
+		// network, mask, root, color, description
+		array('fd00::',              8,  1, '#AAFFAA', 'ULA'),
+		array('fd12:3400::',         24, 0, '#AAAAFF', 'Lab'),
+		array('fd12:3400:5600::',    40, 0, '#FFAAAA', 'Lab Rack 1'),
+		array('2001:db8:4100::',     40, 0, '#FFCC00', 'Site A'),
+		array('2001:db8:4100:1200::', 56, 0, '#00CCFF', 'Server-VLAN'),
+		array('2001:db8:ac00::',     48, 0, '#CCCCCC', 'Hidden'),
+		array('2001:db8:ac00:ab00::', 120, 0, '#CCCCCC', 'Deep'),
+	);
+	$st = $db->prepare('INSERT INTO `ipamv6` (`network`, `network_bin`, `mask`, `root`, `color`, `description`) VALUES (?, ?, ?, ?, ?, ?)');
+	foreach ($networks as $n) {
+		$expanded = implode(':', str_split(bin2hex(inet_pton($n[0])), 4));
+		$st->execute(array($expanded, bin($n[0]), $n[1], $n[2], $n[3], $n[4]));
+	}
+}
+
+/**
+ * Binary network of an IPv6 address (128 characters "0"/"1").
+ */
+function bin($hex)
+{
+	$bin = '';
+	foreach (str_split(inet_pton($hex)) as $byte) {
+		$bin .= str_pad(decbin(ord($byte)), 8, '0', STR_PAD_LEFT);
+	}
+	return $bin;
+}
+
+/**
+ * Background colors of the sudoku cells, e.g. array('00' => 'white', 'C0' => '#4D0CFF', ...).
+ */
+function cellColors($html)
+{
+	preg_match_all('/<td\s+id="cell([0-9A-F]{2})"\s+class="field_\1"\s+style="background-color: ([^"]*)"/', $html, $m);
+	return array_combine($m[1], $m[2]);
+}
+
+/**
+ * Number of SQL queries the database server answered so far (all connections).
+ */
+function queryCount()
+{
+	global $db;
+	$n = 0;
+	foreach ($db->query("SHOW GLOBAL STATUS WHERE Variable_name IN ('Com_select', 'Com_stmt_execute')") as $row) {
+		$n += (int)$row['Value'];
+	}
+	return $n;
+}
+
 function rowCount($where = '1')
 {
 	global $db;
@@ -462,7 +521,7 @@ check('XSS: Beschreibung wird ueberall escaped', function (&$e) {
 		'Bearbeiten'       => array('/', array('action' => 'editNetworkForm', 'id' => 820)),
 		'isPossible'       => array('/isPossible.php', array('network' => '2001:db8::', 'mask' => 32)),
 		'getHiddenNetworks' => array('/getHiddenNetworks.php', array(
-			'mask' => 32, 'lastNetwork_bin' => substr_replace(NET_2001_DB8_32, '11000000', 32, 8))),
+			'mask' => 32, 'lastNetwork_bin' => substr_replace(NET_2001_DB8_32, '11000000', 32, 8), 'root' => NET_2001_DB8_32)),
 	);
 	foreach ($pages as $name => $page) {
 		list(, $body) = request('GET', $page[0], $page[1]);
@@ -547,6 +606,115 @@ check('Smoke-Tests sind nicht per Webserver ausfuehrbar', function (&$e) {
 check('TODO-Liste wird escaped statt eingebunden', function (&$e) {
 	$r = request('GET', '/', array('action' => 'todo'));
 	expectPage($e, $r, array('(done)', '&quot;'));
+});
+
+// ---------------------------------------------------------------------------
+// Beispielnetze: Sudoku, Navigation, versteckte Subnetze, Anzahl der Abfragen
+// ---------------------------------------------------------------------------
+
+check('Sudoku: Zellen zeigen das groesste Netz', function (&$e) {
+	addExampleNetworks();
+	$r = request('GET', '/', array('action' => 'sudoku', 'mask' => 32, 'network' => bin('2001:db8::')));
+	expectPage($e, $r);
+	$expected = array();
+	for ($i = 0; $i < 256; $i++) {
+		$expected[sprintf('%02X', $i)] = 'white';
+	}
+	foreach (array(0x0C, 0x0D, 0x0E, 0x0F, 0xAB) as $i) {
+		$expected[sprintf('%02X', $i)] = '#FFFFAA';     // 2001:db8:c00::/38 und 2001:db8:ab00::/40
+	}
+	for ($i = 0x40; $i <= 0x4F; $i++) {
+		$expected[sprintf('%02X', $i)] = '#FF266E';     // 2001:db8:4000::/36, ueberdeckt "Site A" (/40)
+	}
+	for ($i = 0xC0; $i <= 0xFF; $i++) {
+		$expected[sprintf('%02X', $i)] = '#4D0CFF';     // 2001:db8:c000::/34
+	}
+	$colors = cellColors($r[1]);
+	ksort($colors);
+	ksort($expected);
+	expectTrue($e, count($colors) === 256, count($colors) . ' Zellen statt 256');
+	foreach ($expected as $cell => $color) {
+		expectTrue($e, ($colors[$cell] ?? null) === $color, "Zelle $cell: " . var_export($colors[$cell] ?? null, true) . " statt $color");
+	}
+	// 2001:db8:ac00::/48 ist kleiner als /40: weisse Zelle mit Hinweis
+	expectTrue($e, (bool)preg_match('/id="cellAC".*?<\/td>/s', $r[1], $m) && strpos($m[0], 'img/info.png') !== false,
+		'Zelle AC ohne Hinweis auf kleinere Subnetze');
+	// die Zellen stehen in der verschraenkten Reihenfolge 00 01 04 05 10 ...
+	preg_match_all('/id="cell([0-9A-F]{2})"/', $r[1], $m);
+	expectTrue($e, implode(' ', array_slice($m[1], 0, 9)) === '00 01 04 05 10 11 14 15 40', 'Reihenfolge der Zellen: ' . implode(' ', array_slice($m[1], 0, 9)));
+	expectTrue($e, implode(' ', array_slice($m[1], 16, 2)) === '02 03', 'zweite Zeile beginnt nicht mit 02 03');
+});
+
+check('Navigation: Root-Netz und Beschriftung', function (&$e) {
+	addExampleNetworks();
+	$cases = array(
+		// Ansicht => [Root-Netz, Root-Maske, Beschriftung]
+		'2001:db8:4100::/40'      => array('2001:db8::', 32, 'Site A'),
+		'2001:db8:4100:1200::/56' => array('2001:db8::', 32, 'Server-VLAN'),
+		'2001:db8:4100:1300::/56' => array('2001:db8::', 32, 'Site A'),   // kein eigenes Netz: das naechstgroessere
+		'2001:db8:4200::/40'      => array('2001:db8::', 32, 'abcde'),    // nicht das Nachbarnetz "Site A"
+		'fd12:3400:5600::/48'     => array('fd00::', 8, 'Lab Rack 1'),
+		'2001:db9::/32'           => array('::', 0, ''),                  // ausserhalb aller Netze
+	);
+	foreach ($cases as $view => $exp) {
+		list($net, $mask) = explode('/', $view);
+		$r = request('GET', '/', array('action' => 'sudoku', 'mask' => $mask, 'network' => bin($net)));
+		expectPage($e, $r);
+		preg_match('/<div id="navBar">.*?<\/div>/s', $r[1], $nav);
+		$nav = $nav[0] ?? '';
+		$root = 'mask=' . $exp[1] . '&amp;network=' . bin($exp[0]);
+		expectTrue($e, strpos($nav, '<a href="./?action=sudoku&amp;' . $root . '">') !== false, "$view: Root-Netz ist nicht {$exp[0]}/{$exp[1]}");
+		expectTrue($e, (bool)preg_match('/\(\s*' . preg_quote($exp[2], '/') . '\s*\)\s*<\/span>/', $nav), "$view: Beschriftung ist nicht \"{$exp[2]}\"");
+	}
+});
+
+/**
+ * Opens the sudoku view, clicks every "..." like the browser does and returns the HTML of the expanded lists.
+ */
+function expandHidden(array &$e, $net, $mask)
+{
+	$r = request('GET', '/', array('action' => 'sudoku', 'mask' => $mask, 'network' => bin($net)));
+	expectPage($e, $r);
+	preg_match_all("/expandNetworks\((\d+), '([01]*)', (\d+), '([01]+)'\)/", $r[1], $m, PREG_SET_ORDER);
+	$html = array();
+	foreach ($m as $x) {
+		$h = request('GET', '/getHiddenNetworks.php', array('mask' => $x[3], 'lastNetwork_bin' => $x[2], 'root' => $x[4]));
+		expectPage($e, $h);
+		$html[] = $h[1];
+	}
+	return $html;
+}
+
+check('Versteckte Subnetze: nach einem sichtbaren Netz', function (&$e) {
+	addExampleNetworks();
+	$lists = expandHidden($e, '2001:db8::', 32);
+	expectTrue($e, count($lists) === 1, count($lists) . ' "..."-Eintraege statt 1');
+	$html = implode('', $lists);
+	foreach (array('2001:db8:ac00::/48 (Hidden)', '2001:db8:ac00:ab00::/120 (Deep)') as $needle) {
+		expectTrue($e, strpos($html, $needle) !== false, "fehlt: $needle");
+	}
+	foreach (array('Lab', 'ULA') as $other) {
+		expectTrue($e, strpos($html, "($other") === false, "Netz aus einem anderen Root-Netz: $other");
+	}
+});
+
+check('Versteckte Subnetze: vor dem ersten sichtbaren Netz', function (&$e) {
+	addExampleNetworks();
+	$lists = expandHidden($e, 'fd00::', 8);
+	expectTrue($e, count($lists) === 1, count($lists) . ' "..."-Eintraege statt 1');
+	$html = implode('', $lists);
+	foreach (array('fd12:3400::/24 (Lab)', 'fd12:3400:5600::/40 (Lab Rack 1)') as $needle) {
+		expectTrue($e, strpos($html, $needle) !== false, "fehlt: $needle");
+	}
+	expectTrue($e, strpos($html, '2001:db8') === false, 'Netz aus einem anderen Root-Netz: 2001:db8::');
+});
+
+check('Sudoku-Ansicht braucht nur wenige Datenbankabfragen', function (&$e) {
+	addExampleNetworks();
+	$before = queryCount();
+	expectPage($e, request('GET', '/', array('action' => 'sudoku', 'mask' => 32, 'network' => bin('2001:db8::'))));
+	$queries = queryCount() - $before;
+	expectTrue($e, $queries <= 10, "$queries Abfragen");
 });
 
 echo "\n$passed bestanden, $failures fehlgeschlagen\n";

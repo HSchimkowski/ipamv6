@@ -34,7 +34,8 @@ CREATE TABLE IF NOT EXISTS `ipamv6` (
   `root` double NOT NULL,
   `color` varchar(7) NOT NULL,
   `description` text NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `network_bin_mask` (`network_bin`,`mask`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=827 ;
 
 --
